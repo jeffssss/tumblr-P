@@ -1,0 +1,9 @@
+platform :ios,'7.0'
+
+pod 'TMTumblrSDK', :path=>'~/git/TMTumblrSDK'
+pod 'SDWebImage', '~>3.7'
+pod "KLCPopup", '~>1.0'
+pod 'MJRefresh'
+pod 'MBProgressHUD', '~> 0.9.1'
+pod "YYCategories"
+pod 'NJKWebViewProgress'

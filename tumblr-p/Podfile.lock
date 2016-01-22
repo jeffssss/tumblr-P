@@ -1,0 +1,59 @@
+PODS:
+  - JXHTTP (3.0.2)
+  - KLCPopup (1.0)
+  - MBProgressHUD (0.9.2)
+  - MJRefresh (3.1.0)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - Spectacles (1.0.1)
+  - TMTumblrSDK (4.0.3):
+    - TMTumblrSDK/Activity (= 4.0.3)
+    - TMTumblrSDK/APIClient (= 4.0.3)
+    - TMTumblrSDK/AppClient (= 4.0.3)
+    - TMTumblrSDK/Core (= 4.0.3)
+  - TMTumblrSDK/Activity (4.0.3)
+  - TMTumblrSDK/APIClient (4.0.3):
+    - JXHTTP
+    - TMTumblrSDK/APIClient/Authentication (= 4.0.3)
+  - TMTumblrSDK/APIClient/Authentication (4.0.3):
+    - JXHTTP
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/AppClient (4.0.3):
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/Core (4.0.3):
+    - Spectacles (~> 1.0)
+  - YYCategories (0.9.4):
+    - YYCategories/no-arc (= 0.9.4)
+  - YYCategories/no-arc (0.9.4)
+
+DEPENDENCIES:
+  - KLCPopup (~> 1.0)
+  - MBProgressHUD (~> 0.9.1)
+  - MJRefresh
+  - NJKWebViewProgress
+  - SDWebImage (~> 3.7)
+  - TMTumblrSDK (from `~/git/TMTumblrSDK`)
+  - YYCategories
+
+EXTERNAL SOURCES:
+  TMTumblrSDK:
+    :path: "~/git/TMTumblrSDK"
+
+SPEC CHECKSUMS:
+  JXHTTP: c37120f210cd2dfcb3470d70239f5253335e2f1a
+  KLCPopup: 76c5a19227977f1e53d85236f9ef42257c168d98
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  Spectacles: 8dc60711140320653724560e2d6bbb8a8f0940e4
+  TMTumblrSDK: a9ba0761d098cf6389cfbbe8d915736f01758609
+  YYCategories: 3c7e012ac4573b1fc432f9a2eac15109857391d2
+
+COCOAPODS: 0.39.0

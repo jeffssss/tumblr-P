@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  tumblr-p
+//
+//  Created by JiFeng on 16/1/19.
+//  Copyright © 2016年 jeffsss. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "Macro.h"
+#import <YYCategories/YYCategories.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "TMAPIClient.h"
+
+#endif /* PrefixHeader_pch */

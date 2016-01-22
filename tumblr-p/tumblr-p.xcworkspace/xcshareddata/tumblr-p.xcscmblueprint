@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9D9F367475983F66DE9AD8BE95689E1DE4C3EB63",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9D9F367475983F66DE9AD8BE95689E1DE4C3EB63" : 0,
+    "4E7BD133BB6884D819AD87AE1677BC7627A8BF27" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "637A56A7-ED18-42C5-A691-DFEA4B618604",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9D9F367475983F66DE9AD8BE95689E1DE4C3EB63" : "tumblr-P\/",
+    "4E7BD133BB6884D819AD87AE1677BC7627A8BF27" : "..\/git\/TMTumblrSDK"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "tumblr-p",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "tumblr-p\/tumblr-p.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tumblr\/TMTumblrSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4E7BD133BB6884D819AD87AE1677BC7627A8BF27"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeffssss\/tumblr-P.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9D9F367475983F66DE9AD8BE95689E1DE4C3EB63"
+    }
+  ]
+}

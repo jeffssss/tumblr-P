@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +18,34 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self registeTumblr];
+    
+    [self checkLogin];
+    
+    [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void)checkLogin{
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"]){
+        MainViewController *vc = [[MainViewController alloc] init];
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
+    } else {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];;
+    }
+}
+
+-(void)registeTumblr{
+    [TMAPIClient sharedInstance].OAuthConsumerKey = @"PBwhtXxAZCnmVyzBmcc6fJG7EUXE41F5js8MJFOohuxSAMWD1G";
+    [TMAPIClient sharedInstance].OAuthConsumerSecret = @"nItXj5DFC1VBwk3qEEiIJUjW6ngKqQI1lGPRjyS1eA8bXo0z6Q";
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[TMAPIClient sharedInstance] handleOpenURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
