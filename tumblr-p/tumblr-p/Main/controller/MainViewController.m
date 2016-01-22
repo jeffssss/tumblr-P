@@ -7,9 +7,26 @@
 //
 
 #import "MainViewController.h"
+#import "MJRefresh.h"
+#import "LoginViewController.h"
 
-@interface MainViewController ()
+//当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
+#define refreshDataLimitLine 30
 
+@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate>
+//主tableview
+@property(nonatomic,strong) UITableView     *mainTableView;
+//当前的offset，用于计算下拉
+@property(nonatomic,assign) NSInteger       offset;//暂时是不需要offset参数
+//当前的每页数量
+@property(nonatomic,assign) NSInteger       limit;//默认为20
+//当前接收的种类
+@property(nonatomic,copy)   NSString        *currentType;//TODO:暂时仅photo
+//当前最近一个post的id
+@property(nonatomic,assign) NSInteger       sinceId;
+
+//tableview数据源
+@property(nonatomic,strong) NSMutableArray  *dataArray;
 
 
 @end
@@ -25,15 +42,218 @@
     self.title = @"Tumblr-P";
     self.view.backgroundColor = [UIColor redColor];
     
-}
-
-
--(void)getDashBoardInfo{
+    //初始化参数在这里：
+    self.offset = 0;
+    self.limit = 20;
+    self.currentType = @"photo";
+    self.dataArray = [[NSMutableArray alloc] init];
     
-    [[TMAPIClient sharedInstance] dashboard:<#(NSDictionary *)#> callback:^(id, NSError *error) {
-        //
-    }]
+    [self mainTableView];
+    //打印一下token
+    NSLog(@"token:%@\nsecret:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"],[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token_secret"]);
 }
+#pragma mark - getter
+-(UITableView *)mainTableView{
+    if(nil == _mainTableView){
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) style:UITableViewStylePlain];
+        _mainTableView.backgroundColor = [UIColor whiteColor];
+        _mainTableView.delegate = self;
+        _mainTableView.dataSource = self;
+        _mainTableView.allowsSelection = NO;
+//        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_mainTableView];
+        
+        //设置下拉刷新,拉取since当前最新的数据。
+        //规则：1.如果since_id为空，则正常拉取数据.
+        //2.用since_id拉取30条，如果拉满30条，则需要更新数据源，这时候重新用offset=0去拉数据。否则直接加上数据。
+        WeakSelf
+        _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            StrongSelf
+            if(!sSelf.sinceId){
+                //sinceid不存在,即之前没有数据
+                NSDictionary *params = [sSelf buildDashBoardInfoParamsWithLimit:sSelf.limit
+                                                                         Offset:0
+                                                                           Type:sSelf.currentType
+                                                                        SinceId:0];
+                
+                //TODO: 提示错误,用自动消失的那种
+                //TODO:判断失败原因，如果是token过期需要退回到登陆界面
+                [[TMAPIClient sharedInstance] dashboard:params callback:^(id result, NSError *error) {
+                    StrongSelf
+                    
+                    [sSelf.mainTableView.mj_header endRefreshing];
+                    
+                    if(error){
+                        //失败
+                        //如果为401 说明没有认证。
+                        if(error.code == 401){
+                            //TODO 提示过期
+                            
+                            [sSelf directToLoginViewController];
+                        }
+                        return;
+                    }
+                    //成功
+                    NSArray *posts = [result objectForKey:@"posts"];
+                    
+                    sSelf.offset = posts.count;
+                    if(posts.count > 0){
+                        sSelf.sinceId = [posts[0][@"id"] integerValue];
+                    }
+                    sSelf.dataArray = [posts mutableCopy];
+                    [sSelf.mainTableView reloadData];
+                }];
+                return;
+            }
+            //之前已经有数据了。用sinceid拉取新的，limit设为30
+            NSDictionary *params = [sSelf buildDashBoardInfoParamsWithLimit:refreshDataLimitLine
+                                                                     Offset:0
+                                                                       Type:sSelf.currentType
+                                                                    SinceId:sSelf.sinceId];
+            [[TMAPIClient sharedInstance] dashboard:params callback:^(id result, NSError *error) {
+                StrongSelf
+                
+                
+                
+                if(error){
+                    
+                    [sSelf.mainTableView.mj_header endRefreshing];
+                    
+                    if(error.code == 401){
+                        //TODO 提示过期
+                        
+                        [sSelf directToLoginViewController];
+                    }
+                    return ;
+                }
+                //成功
+                NSArray *posts = [result objectForKey:@"posts"];
+                if(posts.count<refreshDataLimitLine){
+                    
+                    //正常的在前面加内容
+                    sSelf.offset = sSelf.offset + posts.count;
+                    if(posts.count > 0){
+                        sSelf.sinceId = [posts[0][@"id"] integerValue];
+                    }
+                    [sSelf.dataArray insertObjects:posts atIndex:0];
+                    
+                    [sSelf.mainTableView reloadData];
+                    
+                    [sSelf.mainTableView.mj_header endRefreshing];
+                    
+                } else {
+                    //重新加载数据源
+                    NSDictionary *newparams = [sSelf buildDashBoardInfoParamsWithLimit:sSelf.limit
+                                                                                Offset:0
+                                                                                  Type:sSelf.currentType
+                                                                               SinceId:0];
+                    [[TMAPIClient sharedInstance] dashboard:newparams callback:^(id result, NSError *error) {
+                        StrongSelf
+                        
+                        [sSelf.mainTableView.mj_header endRefreshing];
+                        
+                        //失败
+                        if(error){
+                            if(error.code == 401){
+                                //TODO 提示过期
+                                
+                                [sSelf directToLoginViewController];
+                            }
+                            return ;
+                        }
+                        
+                        //成功
+                        NSArray *posts = [result objectForKey:@"posts"];
+                        
+                        sSelf.offset = posts.count;
+                        if(posts.count > 0){
+                            sSelf.sinceId = [posts[0][@"id"] integerValue];
+                        } else {
+                            sSelf.sinceId = 0;
+                        }
+                        sSelf.dataArray = [posts mutableCopy];
+                        
+                        [sSelf.mainTableView reloadData];
+                    }];
+                }
+            }];
+        }];
+        
+        //设置上拉继续加载
+        _mainTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            StrongSelf
+            NSDictionary *params = [sSelf buildDashBoardInfoParamsWithLimit:sSelf.limit
+                                                                     Offset:sSelf.offset
+                                                                       Type:sSelf.currentType
+                                                                    SinceId:0];
+            [[TMAPIClient sharedInstance] dashboard:params callback:^(id result, NSError *error) {
+                StrongSelf
+                
+                [sSelf.mainTableView.mj_footer endRefreshing];
+                
+                if(error){
+                    //失败
+                    if(error.code == 401){
+                        //TODO 提示过期
+                        
+                        [sSelf directToLoginViewController];
+                    }
+                    return ;
+                }
+                
+                //成功
+                NSArray *posts = [result objectForKey:@"posts"];
+                sSelf.offset = sSelf.offset + posts.count;
+                [sSelf.dataArray addObjectsFromArray:posts];
+                [sSelf.mainTableView reloadData];
+                
+            }];
+        }];
+    }
+    return _mainTableView;
+}
+
+#pragma mark - UITableView delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataArray.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [[UITableViewCell alloc] init];
+}
+#pragma mark - private
+//构建请求参数
+-(NSDictionary *)buildDashBoardInfoParamsWithLimit:(NSInteger)limit Offset:(NSInteger)offset Type:(NSString *)type SinceId:(NSInteger)sinceId{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if(limit){
+        [params setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+    }
+    if(offset){
+        [params setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+    }
+    if(nil != type && ![type isEqualToString:@""]){
+        [params setObject:type forKey:@"type"];
+    }
+    if(sinceId){
+        [params setObject:[NSNumber numberWithInteger:sinceId] forKey:@"since_id"];
+    }
+    NSLog(@"********************\ndashboard params:%@\n********************\n",params);
+    return [params copy];
+}
+
+-(void)directToLoginViewController{
+    //跳转到注册页面
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    UINavigationController *loginVCNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [UIView transitionFromView:self.view
+                        toView:loginVC.view
+                      duration:1
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    completion:^(BOOL finished){
+                        [[UIApplication sharedApplication].delegate window].rootViewController = loginVCNav;
+                    }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

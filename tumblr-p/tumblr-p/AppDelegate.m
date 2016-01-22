@@ -26,6 +26,7 @@
     [self checkLogin];
     
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -40,8 +41,12 @@
 }
 
 -(void)registeTumblr{
-    [TMAPIClient sharedInstance].OAuthConsumerKey = @"PBwhtXxAZCnmVyzBmcc6fJG7EUXE41F5js8MJFOohuxSAMWD1G";
-    [TMAPIClient sharedInstance].OAuthConsumerSecret = @"nItXj5DFC1VBwk3qEEiIJUjW6ngKqQI1lGPRjyS1eA8bXo0z6Q";
+    [TMAPIClient sharedInstance].OAuthConsumerKey = @"";
+    [TMAPIClient sharedInstance].OAuthConsumerSecret = @"";
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"]){
+        [TMAPIClient sharedInstance].OAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+        [TMAPIClient sharedInstance].OAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token_secret"];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {

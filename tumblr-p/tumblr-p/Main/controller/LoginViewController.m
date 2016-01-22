@@ -102,7 +102,7 @@
 #pragma mark - sel
 -(void)onLoginBtnClick:(id)sender{
     NSLog(@"login");
-    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂时无法使用此方法登陆" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"暂时无法使用此方法登陆" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
     [alert show];
     return;
 //    //检查是否输入
@@ -158,7 +158,7 @@
         if (error){
             NSLog(@"Authentication failed: %@ %@", error, [error description]);
 
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆失败！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆失败！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
             [alert show];
             return;
         }
