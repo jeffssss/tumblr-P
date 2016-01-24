@@ -79,9 +79,7 @@
                                                                            Type:sSelf.currentType
                                                                         SinceId:0];
                 
-                //TODO: 提示错误,用自动消失的那种
                 
-                //TODO:判断失败原因，如果是token过期需要退回到登陆界面
                 [[TMAPIClient sharedInstance] dashboard:params callback:^(id result, NSError *error) {
                     StrongSelf
                     
@@ -91,9 +89,10 @@
                         //失败
                         //如果为401 说明没有认证。
                         if(error.code == 401){
-                            //TODO 提示过期
-                            
+                            [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                             [sSelf directToLoginViewController];
+                        } else {
+                            [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d %@",(int)error.code,error.domain] withType:@"error"];
                         }
                         return;
                     }
@@ -124,8 +123,7 @@
                     [sSelf.mainTableView.mj_header endRefreshing];
                     
                     if(error.code == 401){
-                        //TODO: 提示过期
-                        
+                        [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                         [sSelf directToLoginViewController];
                     }
                     return ;
@@ -159,8 +157,7 @@
                         //失败
                         if(error){
                             if(error.code == 401){
-                                //TODO: 提示过期
-                                
+                                [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                                 [sSelf directToLoginViewController];
                             }
                             return ;
@@ -201,8 +198,7 @@
                 if(error){
                     //失败
                     if(error.code == 401){
-                        //TODO: 提示过期
-                        
+                        [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                         [sSelf directToLoginViewController];
                     }
                     return ;
@@ -244,6 +240,63 @@
 #pragma mark - DashboardCellDelegate
 
 -(void)onFollowBtnClick:(DashboardTableViewCell *)cell willFollow:(BOOL)willFollow{
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    NSMutableDictionary *post = [self.dataArray[indexPath.row] mutableCopy];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    WeakSelf
+    if(willFollow){
+        //调用关注接口
+        [[TMAPIClient sharedInstance] follow:post[@"blog_name"] callback:^(id result, NSError *error) {
+            StrongSelf
+            [MBProgressHUD hideHUDForView:sSelf.view animated:YES];
+            if(error){
+                //失败
+                //如果为401 说明没有认证。
+                if(error.code == 401){
+                    [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
+                    [sSelf directToLoginViewController];
+                } else {
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d %@",(int)error.code,error.domain] withType:@"error"];
+                }
+                return;
+            }
+            //成功
+            NSLog(@"%@",result);
+            [[AlertPopupManager sharedManager] postTips:@"Follow成功!" withType:@"done"];
+            //改变数据源
+            post[@"followed"] = [NSNumber numberWithBool:YES];
+            [sSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:[post copy]];
+            //改变UI
+            [cell changeToFollow:YES];
+        }];
+    } else {
+        //调用取关接口
+        [[TMAPIClient sharedInstance] unfollow:post[@"blog_name"] callback:^(id result, NSError *error) {
+            StrongSelf
+            [MBProgressHUD hideHUDForView:sSelf.view animated:YES];
+            if(error){
+                //失败
+                //如果为401 说明没有认证。
+                if(error.code == 401){
+                    [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
+                    [sSelf directToLoginViewController];
+                } else {
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d %@",(int)error.code,error.domain] withType:@"error"];
+                }
+                return;
+            }
+            //成功
+            NSLog(@"%@",result);
+            [[AlertPopupManager sharedManager] postTips:@"Unfollow成功!" withType:@"done"];
+            //改变数据源
+            post[@"followed"] = [NSNumber numberWithBool:NO];
+            [sSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:[post copy]];
+            //改变UI
+            [cell changeToFollow:NO];
+        }];
+    }
+    
     
 }
 

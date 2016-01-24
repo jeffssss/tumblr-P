@@ -116,11 +116,9 @@
     self.blogNameLabel.frame = CGRectMake(self.posterAvatar.right, 0, blogNameLabelSize.width + 16, topViewHeight);
     
     if([data[@"followed"] boolValue]){
-        [self.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
-        [self.followBtn addTarget:self action:@selector(onUnfollowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self changeToFollow:YES];
     } else {
-        [self.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
-        [self.followBtn addTarget:self action:@selector(onFollowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self changeToFollow:NO];
     }
     
     //middleView
@@ -158,11 +156,9 @@
     [self.notesNumberBtn setTitle:[NSString stringWithFormat:@"%@ notes",data[@"note_count"]] forState:UIControlStateNormal];
     
     if([data[@"liked"] boolValue]){
-        [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        [self.likeBtn setTarget:self action:@selector(onUnLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self changeToLike:YES];
     } else {
-        [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like_outline"] forState:UIControlStateNormal];
-        [self.likeBtn setTarget:self action:@selector(onLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self changeToLike:NO];
     }
     
     //改变cardView高度
@@ -177,15 +173,39 @@
     return self.height ;
 }
 
+-(void)changeToFollow:(BOOL)willFollow{
+    if(willFollow){
+        [self.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
+        [self.followBtn setTarget:self action:@selector(onUnfollowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [self.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
+        [self.followBtn setTarget:self action:@selector(onFollowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+-(void)changeToLike:(BOOL)willLike{
+    if(willLike){
+        [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [self.likeBtn setTarget:self action:@selector(onUnLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like_outline"] forState:UIControlStateNormal];
+        [self.likeBtn setTarget:self action:@selector(onLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
 #pragma mark - SEL
 
 -(void)onUnfollowBtnClick:(id)sender{
-    //TODO:使用delegate
-    [[AlertPopupManager sharedManager] postTips:@"unfollow!" withType:@"done"];
+    if([self.delegate respondsToSelector:@selector(onFollowBtnClick:willFollow:)]){
+        [self.delegate onFollowBtnClick:self willFollow:NO];
+    }
+//    [[AlertPopupManager sharedManager] postTips:@"unfollow!" withType:@"done"];
 }
 
 -(void)onFollowBtnClick:(id)sender{
-    //TODO:使用delegate
+    if([self.delegate respondsToSelector:@selector(onFollowBtnClick:willFollow:)]){
+        [self.delegate onFollowBtnClick:self willFollow:YES];
+    }
 }
 
 -(void)onNotesNumberBtnClick:(id)sender{
@@ -281,5 +301,6 @@
     //只能使用最小的咯
     [imageView sd_setImageWithURL:[NSURL URLWithString:smallerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
 }
+
 
 @end

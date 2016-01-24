@@ -33,4 +33,8 @@
 
 -(CGFloat)getHeight;
 
+-(void)changeToFollow:(BOOL)willFollow;
+
+-(void)changeToLike:(BOOL)willLike;
+
 @end
