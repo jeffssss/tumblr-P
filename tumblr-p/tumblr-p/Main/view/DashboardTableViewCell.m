@@ -59,8 +59,6 @@
         [_cardView addSubview:_topView];
         
         _posterAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
-        //TODO 之后要改成SDWebImage
-        _posterAvatar.image = [UIImage imageNamed:@"avatar_placeholder.jpg"];
         [_topView addSubview:_posterAvatar];
         
         _blogNameLabel = [[UILabel alloc] init];
@@ -111,7 +109,7 @@
 
 -(void)loadData:(NSDictionary *)data{
     //topview
-    //TODO:头像
+    [self.posterAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.tumblr.com/v2/blog/%@.tumblr.com/avatar",data[@"blog_name"]]] placeholderImage:[UIImage imageNamed:@"avatar_placeholder.jpg"]];
     
     self.blogNameLabel.text = data[@"blog_name"];
     CGSize blogNameLabelSize = [_blogNameLabel sizeThatFits:CGSizeMake(MAXFLOAT, topViewHeight)];
@@ -205,6 +203,12 @@
 -(void)onReblogBtnClick:(id)sender{
     //TODO:使用delegate
 }
+
+-(void)tapImage:(UITapGestureRecognizer *)sender{
+    if([self.delegate respondsToSelector:@selector(onImageViewTapped:imageView:andIndex:)]){
+        [self.delegate onImageViewTapped:self imageView:(UIImageView *)sender.view andIndex:(sender.view.tag - CommonTagBase)];
+    }
+}
 #pragma mark - private
 -(CGFloat)getHeightAndcreateImageViews:(UIView *)parentView WithData:(NSDictionary *)data{
     //清除原有的
@@ -235,6 +239,12 @@
         for(int i = 0 ; i<imageViewNumber ; i++){
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*(imageWidth + pictureCutLineWidth), currentHeight, imageWidth, imageHeight)];
             imageView.tag = CommonTagBase + currentImage;
+            imageView.userInteractionEnabled = YES;
+            [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)]];
+            // 内容模式
+            imageView.clipsToBounds = YES;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            
             currentImage ++ ;
             [parentView addSubview:imageView];
         }

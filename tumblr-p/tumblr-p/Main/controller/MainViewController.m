@@ -10,6 +10,8 @@
 #import "MJRefresh.h"
 #import "LoginViewController.h"
 #import "DashboardTableViewCell.h"
+#import "MJPhoto.h"
+#import "MJPhotoBrowser.h"
 
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
@@ -232,6 +234,7 @@
         cell = [[DashboardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID Data:self.dataArray[indexPath.row]];
     }
     [cell loadData:self.dataArray[indexPath.row]];
+    cell.delegate = self;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -240,20 +243,43 @@
 
 #pragma mark - DashboardCellDelegate
 
--(void)onFollowBtnClick:(id)sender willFollow:(BOOL)willFollow{
+-(void)onFollowBtnClick:(DashboardTableViewCell *)cell willFollow:(BOOL)willFollow{
     
 }
 
--(void)onNotesNumberBtnClick:(id)sender{
+-(void)onNotesNumberBtnClick:(DashboardTableViewCell *)cell{
     
 }
 
--(void)onLikeBtnClick:(id)sender willLike:(BOOL)willLike{
+-(void)onLikeBtnClick:(DashboardTableViewCell *)cell willLike:(BOOL)willLike{
     
 }
 
--(void)onReblogBtnClick:(id)sender{
+-(void)onReblogBtnClick:(DashboardTableViewCell *)cell{
     
+}
+
+-(void)onImageViewTapped:(DashboardTableViewCell *)cell imageView:(UIImageView *)imageView andIndex:(NSInteger)index{
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    NSArray *photos = self.dataArray[indexPath.row][@"photos"];
+    
+    NSInteger count = [photos count];
+    // 1.封装图片数据
+    NSMutableArray *newPhotos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0 ; i < count; i++) {
+        //获取origin size
+        NSString *originUrl = photos[i][@"original_size"][@"url"];
+        
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:originUrl]; // 图片路径
+        photo.srcImageView = imageView; // 来源于哪个UIImageView
+        [newPhotos addObject:photo];
+    }
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
+    browser.photos = newPhotos; // 设置所有的图片
+    [browser show];
 }
 
 #pragma mark - private

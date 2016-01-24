@@ -8,19 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@class DashboardTableViewCell;
+
 @protocol DashboardCellDelegate <NSObject>
 
--(void)onFollowBtnClick:(id)sender willFollow:(BOOL)willFollow;
+-(void)onFollowBtnClick:(DashboardTableViewCell *)cell willFollow:(BOOL)willFollow;
 
--(void)onNotesNumberBtnClick:(id)sender;
+-(void)onNotesNumberBtnClick:(DashboardTableViewCell *)cell;
 
--(void)onLikeBtnClick:(id)sender willLike:(BOOL)willLike;
+-(void)onLikeBtnClick:(DashboardTableViewCell *)cell willLike:(BOOL)willLike;
 
--(void)onReblogBtnClick:(id)sender;
+-(void)onReblogBtnClick:(DashboardTableViewCell *)cell;
 
+-(void)onImageViewTapped:(DashboardTableViewCell *)cell imageView:(UIImageView *)imageView andIndex:(NSInteger)index;
 @end
 
 @interface DashboardTableViewCell : UITableViewCell
+
+@property(nonatomic,weak) id<DashboardCellDelegate> delegate;
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Data:(NSDictionary *)data;
 
