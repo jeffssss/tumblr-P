@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "MJRefresh.h"
 #import "LoginViewController.h"
+#import "DashboardTableViewCell.h"
 
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
@@ -60,7 +61,7 @@
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.allowsSelection = NO;
-//        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:_mainTableView];
         
         //设置下拉刷新,拉取since当前最新的数据。
@@ -120,7 +121,7 @@
                     [sSelf.mainTableView.mj_header endRefreshing];
                     
                     if(error.code == 401){
-                        //TODO 提示过期
+                        //TODO: 提示过期
                         
                         [sSelf directToLoginViewController];
                     }
@@ -155,7 +156,7 @@
                         //失败
                         if(error){
                             if(error.code == 401){
-                                //TODO 提示过期
+                                //TODO: 提示过期
                                 
                                 [sSelf directToLoginViewController];
                             }
@@ -194,7 +195,7 @@
                 if(error){
                     //失败
                     if(error.code == 401){
-                        //TODO 提示过期
+                        //TODO: 提示过期
                         
                         [sSelf directToLoginViewController];
                     }
@@ -218,8 +219,18 @@
     return self.dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[UITableViewCell alloc] init];
+    static NSString *ID = @"dashboardCell";
+    DashboardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[DashboardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID Data:self.dataArray[indexPath.row]];
+    }
+    [cell loadData:self.dataArray[indexPath.row]];
+    return cell;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [(DashboardTableViewCell *)[self tableView:self.mainTableView cellForRowAtIndexPath:indexPath] getHeight];
+}
+
 #pragma mark - private
 //构建请求参数
 -(NSDictionary *)buildDashBoardInfoParamsWithLimit:(NSInteger)limit Offset:(NSInteger)offset Type:(NSString *)type SinceId:(NSInteger)sinceId{

@@ -12,4 +12,6 @@
 #define WeakSelf   __typeof(&*self) __weak wSelf = self;
 #define StrongSelf __typeof(&*self) __strong sSelf = wSelf;
 
+#define CommonTagBase 1000
+
 #endif /* Macro_h */

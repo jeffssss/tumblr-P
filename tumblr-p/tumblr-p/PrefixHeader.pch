@@ -13,5 +13,7 @@
 #import <YYCategories/YYCategories.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "TMAPIClient.h"
+#import <SDWebImage/UIImage+GIF.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* PrefixHeader_pch */
