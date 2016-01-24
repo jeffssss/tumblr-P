@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DashboardCellDelegate <NSObject>
+
+-(void)onFollowBtnClick:(id)sender willFollow:(BOOL)willFollow;
+
+-(void)onNotesNumberBtnClick:(id)sender;
+
+-(void)onLikeBtnClick:(id)sender willLike:(BOOL)willLike;
+
+-(void)onReblogBtnClick:(id)sender;
+
+@end
+
 @interface DashboardTableViewCell : UITableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Data:(NSDictionary *)data;

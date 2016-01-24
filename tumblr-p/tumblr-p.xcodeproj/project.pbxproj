@@ -34,6 +34,13 @@
 		C2BE3D5E1C54EC200047C669 /* SDWebImageManager+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = C2BE3D5B1C54EC200047C669 /* SDWebImageManager+MJ.m */; };
 		C2BE3D5F1C54EC200047C669 /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C2BE3D5D1C54EC200047C669 /* UIImageView+MJWebCache.m */; };
 		C2BE3D621C54EC4C0047C669 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = C2BE3D611C54EC4C0047C669 /* MBProgressHUD+Add.m */; };
+		C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C2BE3D711C55208B0047C669 /* AlertPopupManager.m */; };
+		C2BE3D791C5523AF0047C669 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D731C5523AF0047C669 /* checkmark.png */; };
+		C2BE3D7A1C5523AF0047C669 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D741C5523AF0047C669 /* checkmark@2x.png */; };
+		C2BE3D7B1C5523AF0047C669 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D751C5523AF0047C669 /* cross.png */; };
+		C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D761C5523AF0047C669 /* cross@2x.png */; };
+		C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D771C5523AF0047C669 /* warning.png */; };
+		C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D781C5523AF0047C669 /* warning@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +90,14 @@
 		C2BE3D5D1C54EC200047C669 /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
 		C2BE3D601C54EC4C0047C669 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		C2BE3D611C54EC4C0047C669 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		C2BE3D701C55208B0047C669 /* AlertPopupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPopupManager.h; sourceTree = "<group>"; };
+		C2BE3D711C55208B0047C669 /* AlertPopupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPopupManager.m; sourceTree = "<group>"; };
+		C2BE3D731C5523AF0047C669 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		C2BE3D741C5523AF0047C669 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
+		C2BE3D751C5523AF0047C669 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
+		C2BE3D761C5523AF0047C669 /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
+		C2BE3D771C5523AF0047C669 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		C2BE3D781C5523AF0047C669 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,21 +162,21 @@
 		C251CF751C5123220032FE19 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				C251CF761C5123220032FE19 /* TumblrPlus */,
+				C2BE3D701C55208B0047C669 /* AlertPopupManager.h */,
+				C2BE3D711C55208B0047C669 /* AlertPopupManager.m */,
 			);
 			path = Other;
-			sourceTree = "<group>";
-		};
-		C251CF761C5123220032FE19 /* TumblrPlus */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TumblrPlus;
 			sourceTree = "<group>";
 		};
 		C251CF831C53E0360032FE19 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C2BE3D731C5523AF0047C669 /* checkmark.png */,
+				C2BE3D741C5523AF0047C669 /* checkmark@2x.png */,
+				C2BE3D751C5523AF0047C669 /* cross.png */,
+				C2BE3D761C5523AF0047C669 /* cross@2x.png */,
+				C2BE3D771C5523AF0047C669 /* warning.png */,
+				C2BE3D781C5523AF0047C669 /* warning@2x.png */,
 				C2BE3D561C54E9620047C669 /* reblog@2x.png */,
 				C2BE3D571C54E9620047C669 /* reblog@3x.png */,
 				C2BE3D521C54E6730047C669 /* like_outline@2x.png */,
@@ -323,13 +338,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BE3D7B1C5523AF0047C669 /* cross.png in Resources */,
 				C2BE3D591C54E9620047C669 /* reblog@3x.png in Resources */,
 				C2BE3D4D1C54D0970047C669 /* pic_placeholder.png in Resources */,
 				C2AE04131C3E420900A3E627 /* LaunchScreen.storyboard in Resources */,
+				C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */,
 				C2AE04101C3E420900A3E627 /* Assets.xcassets in Resources */,
+				C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */,
 				C2BE3D501C54E60F0047C669 /* like@2x.png in Resources */,
+				C2BE3D791C5523AF0047C669 /* checkmark.png in Resources */,
 				C2BE3D541C54E6730047C669 /* like_outline@2x.png in Resources */,
 				C2BE3D551C54E6730047C669 /* like_outline@3x.png in Resources */,
+				C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */,
+				C2BE3D7A1C5523AF0047C669 /* checkmark@2x.png in Resources */,
 				C2BE3D461C5496100047C669 /* MJPhotoBrowser.bundle in Resources */,
 				C2BE3D581C54E9620047C669 /* reblog@2x.png in Resources */,
 				C2BE3D511C54E60F0047C669 /* like@3x.png in Resources */,
@@ -399,6 +420,7 @@
 				C2BE3D481C5496100047C669 /* MJPhotoLoadingView.m in Sources */,
 				C251CF401C4E52260032FE19 /* LoginViewController.m in Sources */,
 				C2BE3D491C5496100047C669 /* MJPhotoProgressView.m in Sources */,
+				C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */,
 				C2BE3D451C5496100047C669 /* MJPhoto.m in Sources */,
 				C2AE04081C3E420800A3E627 /* AppDelegate.m in Sources */,
 				C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */,

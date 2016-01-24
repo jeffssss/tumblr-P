@@ -46,7 +46,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Data:(NSDictionary *)data{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        self.backgroundColor = UIColorHex(0x36465d);
+        self.backgroundColor = [UIColor clearColor];
         //根据内容计算高度
         
         //cardView 先不指定frame大小
@@ -161,7 +161,7 @@
     
     if([data[@"liked"] boolValue]){
         [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        [self.likeBtn setTarget:self action:@selector(onLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.likeBtn setTarget:self action:@selector(onUnLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like_outline"] forState:UIControlStateNormal];
         [self.likeBtn setTarget:self action:@selector(onLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -171,7 +171,7 @@
     self.cardView.frame = CGRectMake(8, 8, cardWidth, self.bottomBarView.bottom);
     self.cardView.layer.cornerRadius = 4.0;
     //改变self的高度
-    self.frame = CGRectMake(0, 0, kScreenWidth, self.cardView.bottom);
+    self.frame = CGRectMake(0, 0, kScreenWidth, self.cardView.bottom + 2);
     
 }
 
@@ -183,6 +183,7 @@
 
 -(void)onUnfollowBtnClick:(id)sender{
     //TODO:使用delegate
+    [[AlertPopupManager sharedManager] postTips:@"unfollow!" withType:@"done"];
 }
 
 -(void)onFollowBtnClick:(id)sender{
@@ -194,6 +195,10 @@
 }
 
 -(void)onLikeBtnClick:(id)sender{
+    //TODO:使用delegate
+}
+
+-(void)onUnLikeBtnClick:(id)sender{
     //TODO:使用delegate
 }
 
@@ -250,24 +255,15 @@
         return;
     }
     
-    NSDictionary *biggerImage;
+    
+    //策略，使用第一个小于等于imageview的width
     NSDictionary *smallerImage;
-    
-    smallerImage = altSizes[0];
-    
-    //第一个就不大于imageview的width的话就直接使用第一个
-    if([smallerImage[@"width"] floatValue] <= 2*imageView.width ){
-        [imageView sd_setImageWithURL:[NSURL URLWithString:smallerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
-        return;
-    }
-    
-    for(int i = 1 ; i < altSizes.count ; i++){
-        biggerImage = smallerImage;
+    for(int i = 0 ; i < altSizes.count ; i++){
         smallerImage = altSizes[i];
         
         //如果imageView的width比smallerImage大了，说明上一个image，即biggerimage是合适的
-        if([smallerImage[@"width"] floatValue] < 2*imageView.width){
-            [imageView sd_setImageWithURL:[NSURL URLWithString:biggerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
+        if([smallerImage[@"width"] floatValue] <= 2*imageView.width){
+            [imageView sd_setImageWithURL:[NSURL URLWithString:smallerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
             return;
         }
     }

@@ -14,7 +14,7 @@
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
 
-@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate,DashboardCellDelegate>
 //主tableview
 @property(nonatomic,strong) UITableView     *mainTableView;
 //当前的offset，用于计算下拉
@@ -57,7 +57,7 @@
 -(UITableView *)mainTableView{
     if(nil == _mainTableView){
         _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) style:UITableViewStylePlain];
-        _mainTableView.backgroundColor = [UIColor whiteColor];
+        _mainTableView.backgroundColor = UIColorHex(0x36465d);
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.allowsSelection = NO;
@@ -68,7 +68,7 @@
         //规则：1.如果since_id为空，则正常拉取数据.
         //2.用since_id拉取30条，如果拉满30条，则需要更新数据源，这时候重新用offset=0去拉数据。否则直接加上数据。
         WeakSelf
-        _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             StrongSelf
             if(!sSelf.sinceId){
                 //sinceid不存在,即之前没有数据
@@ -78,6 +78,7 @@
                                                                         SinceId:0];
                 
                 //TODO: 提示错误,用自动消失的那种
+                
                 //TODO:判断失败原因，如果是token过期需要退回到登陆界面
                 [[TMAPIClient sharedInstance] dashboard:params callback:^(id result, NSError *error) {
                     StrongSelf
@@ -179,9 +180,12 @@
                 }
             }];
         }];
+        header.stateLabel.textColor = [UIColor whiteColor];
+        header.lastUpdatedTimeLabel.textColor = [UIColor whiteColor];
+        _mainTableView.mj_header = header;
         
         //设置上拉继续加载
-        _mainTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             StrongSelf
             NSDictionary *params = [sSelf buildDashBoardInfoParamsWithLimit:sSelf.limit
                                                                      Offset:sSelf.offset
@@ -210,6 +214,9 @@
                 
             }];
         }];
+        footer.stateLabel.textColor = [UIColor whiteColor];
+        _mainTableView.mj_footer = footer;
+        
     }
     return _mainTableView;
 }
@@ -229,6 +236,24 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [(DashboardTableViewCell *)[self tableView:self.mainTableView cellForRowAtIndexPath:indexPath] getHeight];
+}
+
+#pragma mark - DashboardCellDelegate
+
+-(void)onFollowBtnClick:(id)sender willFollow:(BOOL)willFollow{
+    
+}
+
+-(void)onNotesNumberBtnClick:(id)sender{
+    
+}
+
+-(void)onLikeBtnClick:(id)sender willLike:(BOOL)willLike{
+    
+}
+
+-(void)onReblogBtnClick:(id)sender{
+    
 }
 
 #pragma mark - private
