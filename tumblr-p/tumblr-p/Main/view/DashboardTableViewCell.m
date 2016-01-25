@@ -191,18 +191,18 @@
         [self.likeBtn setBackgroundImage:[UIImage imageNamed:@"like_outline"] forState:UIControlStateNormal];
         [self.likeBtn setTarget:self action:@selector(onLikeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
+    self.likeBtn.enabled = YES;
 }
 
 #pragma mark - SEL
 
--(void)onUnfollowBtnClick:(id)sender{
+-(void)onUnfollowBtnClick:(UIButton *)sender{
     if([self.delegate respondsToSelector:@selector(onFollowBtnClick:willFollow:)]){
         [self.delegate onFollowBtnClick:self willFollow:NO];
     }
-//    [[AlertPopupManager sharedManager] postTips:@"unfollow!" withType:@"done"];
 }
 
--(void)onFollowBtnClick:(id)sender{
+-(void)onFollowBtnClick:(UIButton *)sender{
     if([self.delegate respondsToSelector:@selector(onFollowBtnClick:willFollow:)]){
         [self.delegate onFollowBtnClick:self willFollow:YES];
     }
@@ -211,13 +211,19 @@
 -(void)onNotesNumberBtnClick:(id)sender{
     //TODO:使用delegate
 }
-
--(void)onLikeBtnClick:(id)sender{
-    //TODO:使用delegate
+//因为点like没有菊花，所有需要防止多次点击
+-(void)onLikeBtnClick:(UIButton *)sender{
+    sender.enabled = NO;
+    if([self.delegate respondsToSelector:@selector(onLikeBtnClick:willLike:)]){
+        [self.delegate onLikeBtnClick:self willLike:YES];
+    }
 }
 
--(void)onUnLikeBtnClick:(id)sender{
-    //TODO:使用delegate
+-(void)onUnLikeBtnClick:(UIButton *)sender{
+    sender.enabled = NO;
+    if([self.delegate respondsToSelector:@selector(onLikeBtnClick:willLike:)]){
+        [self.delegate onLikeBtnClick:self willLike:NO];
+    }
 }
 
 -(void)onReblogBtnClick:(id)sender{

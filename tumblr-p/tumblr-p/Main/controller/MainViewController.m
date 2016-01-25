@@ -262,7 +262,7 @@
                     [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                     [sSelf directToLoginViewController];
                 } else {
-                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d %@",(int)error.code,error.domain] withType:@"error"];
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d",(int)error.code] withType:@"error"];
                 }
                 return;
             }
@@ -287,12 +287,12 @@
                     [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
                     [sSelf directToLoginViewController];
                 } else {
-                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d %@",(int)error.code,error.domain] withType:@"error"];
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d",(int)error.code] withType:@"error"];
                 }
                 return;
             }
             //成功
-            NSLog(@"%@",result);
+//            NSLog(@"%@",result);
             [[AlertPopupManager sharedManager] postTips:@"Unfollow成功!" withType:@"done"];
             //改变数据源
             post[@"followed"] = [NSNumber numberWithBool:NO];
@@ -310,7 +310,56 @@
 }
 
 -(void)onLikeBtnClick:(DashboardTableViewCell *)cell willLike:(BOOL)willLike{
-    
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    NSMutableDictionary *post = [self.dataArray[indexPath.row] mutableCopy];
+    WeakSelf
+    if(willLike){
+        //关注
+        [[TMAPIClient sharedInstance] like:post[@"id"] reblogKey:post[@"reblog_key"] callback:^(id result, NSError *error) {
+            StrongSelf
+            if(error){
+                //失败
+                //如果为401 说明没有认证。
+                if(error.code == 401){
+                    [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
+                    [sSelf directToLoginViewController];
+                } else {
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d",(int)error.code] withType:@"error"];
+                }
+                return;
+            }
+            
+            //成功
+            //改变数据源
+            post[@"liked"] = [NSNumber numberWithBool:YES];
+            [sSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:[post copy]];
+            //改变ui
+            [cell changeToLike:YES];
+        }];
+    } else {
+        //取关
+        [[TMAPIClient sharedInstance] unlike:post[@"id"] reblogKey:post[@"reblog_key"] callback:^(id result, NSError *error) {
+            StrongSelf
+            if(error){
+                //失败
+                //如果为401 说明没有认证。
+                if(error.code == 401){
+                    [[AlertPopupManager sharedManager] postTips:@"认证过期，请重新登录" withType:@"error"];
+                    [sSelf directToLoginViewController];
+                } else {
+                    [[AlertPopupManager sharedManager] postTips:[NSString stringWithFormat:@"错误%d",(int)error.code] withType:@"error"];
+                }
+                return;
+            }
+            
+            //成功
+            //改变数据源
+            post[@"liked"] = [NSNumber numberWithBool:NO];
+            [sSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:[post copy]];
+            //改变ui
+            [cell changeToLike:NO];
+        }];
+    }
 }
 
 -(void)onReblogBtnClick:(DashboardTableViewCell *)cell{
