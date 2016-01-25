@@ -141,9 +141,15 @@
         //类型为text或者为chat
         CGFloat middelHeight = [self getHeightAndSetTitle:self.middleContentView WithData:data];
         self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
-//        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, 100);
     } else if([data[@"type"] isEqualToString:@"link"]){
         CGFloat middelHeight = [self getHeightAndSetLinkInfo:self.middleContentView WithData:data];
+        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
+    } else if([data[@"type"] isEqualToString:@"video"]){
+        CGFloat middelHeight = [self getHeightAndSetVideoInfo:self.middleContentView WithData:data];
+        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
+    } else if([data[@"type"] isEqualToString:@"audio"]){
+        //TODO:暂时未实现语音
+        CGFloat middelHeight = [self getHeightAndSetTitle:self.middleContentView WithData:data];
         self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
     } else {
         NSLog(@"获取到其他type的内容");
@@ -243,6 +249,11 @@
 -(void)tapImage:(UITapGestureRecognizer *)sender{
     if([self.delegate respondsToSelector:@selector(onImageViewTapped:imageView:andIndex:)]){
         [self.delegate onImageViewTapped:self imageView:(UIImageView *)sender.view andIndex:(sender.view.tag - CommonTagBase)];
+    }
+}
+-(void)tapVideoThumbnail:(id)sender{
+    if([self.delegate respondsToSelector:@selector(onVideoImageTapped:)]){
+        [self.delegate onVideoImageTapped:self];
     }
 }
 
@@ -348,7 +359,7 @@
     
     return seeDetailBtn.bottom;
 }
-
+//TODO: 待改进的地方是能够在link显示连接，并且点链接就跳转到连接的webview
 -(CGFloat)getHeightAndSetLinkInfo:(UIView *)parentView WithData:(NSDictionary *)data{
     
     //title
@@ -404,4 +415,68 @@
     return seeDetailBtn.bottom;
 }
 
+-(CGFloat)getHeightAndSetVideoInfo:(UIView *)parentView WithData:(NSDictionary *)data{
+    //thumbnail image
+    UIImageView *thumbnailImageView = [[UIImageView alloc] init];
+    CGFloat imageHeight = parentView.width * [data[@"thumbnail_height"] floatValue] / [data[@"thumbnail_width"] floatValue];
+    thumbnailImageView.frame = CGRectMake(0, 0, parentView.width, imageHeight);
+    [thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:data[@"thumbnail_url"]] placeholderImage:[UIImage imageNamed:@"video_placeholder.png"]];
+    thumbnailImageView.userInteractionEnabled = YES;
+    [thumbnailImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVideoThumbnail:)]];
+    [parentView addSubview:thumbnailImageView];
+    
+    //playBtn
+    UIButton *playBtn = [[UIButton alloc] init];
+    [playBtn setImage:[UIImage imageNamed:@"play_video"] forState:UIControlStateNormal];
+    [playBtn.imageView setContentMode:UIViewContentModeScaleToFill];
+    if(thumbnailImageView.width > thumbnailImageView.height){
+        playBtn.frame = CGRectMake((thumbnailImageView.width - 60)/2.0, (thumbnailImageView.height - 60)/2.0, 60, 60);
+    } else {
+        playBtn.frame = CGRectMake((thumbnailImageView.width - 80)/2.0, (thumbnailImageView.height - 80)/2.0, 80, 80);
+    }
+    [playBtn setTarget:self action:@selector(tapVideoThumbnail:) forControlEvents:UIControlEventTouchUpInside];
+    [thumbnailImageView addSubview:playBtn];
+    
+    //summary
+    UILabel *summaryLabel = [[UILabel alloc] init];
+    if([data[@"summary"] isEqual:[NSNull null]]){
+        summaryLabel.text = @" ";
+    } else {
+        summaryLabel.text = data[@"summary"];
+    }
+    summaryLabel.textColor = UIColorHex(0x3b3b3b);
+    summaryLabel.font = [UIFont systemFontOfSize:16.0];
+    summaryLabel.numberOfLines = 0;
+    [parentView addSubview:summaryLabel];
+    CGSize excerptSize = [summaryLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
+    summaryLabel.frame = CGRectMake(5, thumbnailImageView.bottom, parentView.width -5, excerptSize.height + 5*2);
+    
+    //Type
+    UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, summaryLabel.bottom, parentView.width/2.0 -5, 20)];
+    typeLabel.text = [NSString stringWithFormat:@"类别: %@",data[@"video_type"]];
+    typeLabel.textColor =UIColorHex(0x828282);
+    typeLabel.font = [UIFont systemFontOfSize:14.0];
+    [parentView addSubview:typeLabel];
+    
+    //duration
+    UILabel *durationLabel = [[UILabel alloc] initWithFrame:CGRectMake(parentView.width/2.0 - 5, summaryLabel.bottom, parentView.width/2.0, 20)];
+    durationLabel.text = [NSString stringWithFormat:@"时长: %@",[self secondsToDurationString:[data[@"duration"] intValue]]];
+    durationLabel.textColor =UIColorHex(0x828282);
+    durationLabel.font = [UIFont systemFontOfSize:14.0];
+    durationLabel.textAlignment = NSTextAlignmentRight;
+    [parentView addSubview:durationLabel];
+
+    return durationLabel.bottom;
+}
+
+-(NSString *)secondsToDurationString:(int)seconds{
+    //小于一分钟
+    if(seconds < 60){
+        return [NSString stringWithFormat:@"%d秒",seconds];
+    }
+    int minutes = seconds /60;
+    int second = seconds %60;
+    return [NSString stringWithFormat:@"%d分%d秒",minutes,second];
+    
+}
 @end

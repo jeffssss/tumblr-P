@@ -24,6 +24,7 @@
 
 -(void)onTextSeeDetailBtnClick:(DashboardTableViewCell *)cell;
 
+-(void)onVideoImageTapped:(DashboardTableViewCell *)cell;
 @end
 
 @interface DashboardTableViewCell : UITableViewCell

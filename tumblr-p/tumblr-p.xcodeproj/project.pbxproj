@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A8DD626E11EE98C012D9B900 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3442E7B33E172CFBD3A47C24 /* libPods.a */; };
+		C238A5221C56718A00FEDAE6 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C238A5211C56718A00FEDAE6 /* MediaPlayer.framework */; };
+		C238A52F1C569DB600FEDAE6 /* play_video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A52D1C569DB600FEDAE6 /* play_video@2x.png */; };
+		C238A5301C569DB600FEDAE6 /* play_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A52E1C569DB600FEDAE6 /* play_video@3x.png */; };
+		C238A5321C569DEA00FEDAE6 /* video_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5311C569DEA00FEDAE6 /* video_placeholder.png */; };
 		C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C251CF3C1C4E51D90032FE19 /* MainViewController.m */; };
 		C251CF401C4E52260032FE19 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C251CF3F1C4E52260032FE19 /* LoginViewController.m */; };
 		C251CF7F1C5148930032FE19 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C251CF7E1C5148930032FE19 /* Reveal.framework */; };
@@ -49,6 +53,10 @@
 		3442E7B33E172CFBD3A47C24 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95198390EC90588F47863C7B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B719D1C1E1FABB7AF425F766 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C238A5211C56718A00FEDAE6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		C238A52D1C569DB600FEDAE6 /* play_video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video@2x.png"; sourceTree = "<group>"; };
+		C238A52E1C569DB600FEDAE6 /* play_video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video@3x.png"; sourceTree = "<group>"; };
+		C238A5311C569DEA00FEDAE6 /* video_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_placeholder.png; sourceTree = "<group>"; };
 		C251CF3B1C4E51D90032FE19 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C251CF3C1C4E51D90032FE19 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C251CF3E1C4E52260032FE19 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -109,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C238A5221C56718A00FEDAE6 /* MediaPlayer.framework in Frameworks */,
 				A8DD626E11EE98C012D9B900 /* libPods.a in Frameworks */,
 				C251CF7F1C5148930032FE19 /* Reveal.framework in Frameworks */,
 			);
@@ -175,6 +184,9 @@
 		C251CF831C53E0360032FE19 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C238A52D1C569DB600FEDAE6 /* play_video@2x.png */,
+				C238A52E1C569DB600FEDAE6 /* play_video@3x.png */,
+				C238A5311C569DEA00FEDAE6 /* video_placeholder.png */,
 				C2BE3D831C563B7A0047C669 /* logout@2x.png */,
 				C2BE3D841C563B7A0047C669 /* logout@3x.png */,
 				C2BE3D731C5523AF0047C669 /* checkmark.png */,
@@ -277,6 +289,7 @@
 		DF3DF2F121F80443F1B8825C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C238A5211C56718A00FEDAE6 /* MediaPlayer.framework */,
 				C251CF7E1C5148930032FE19 /* Reveal.framework */,
 				3442E7B33E172CFBD3A47C24 /* libPods.a */,
 			);
@@ -346,8 +359,10 @@
 			files = (
 				C2BE3D7B1C5523AF0047C669 /* cross.png in Resources */,
 				C2BE3D591C54E9620047C669 /* reblog@3x.png in Resources */,
+				C238A52F1C569DB600FEDAE6 /* play_video@2x.png in Resources */,
 				C2BE3D4D1C54D0970047C669 /* pic_placeholder.png in Resources */,
 				C2AE04131C3E420900A3E627 /* LaunchScreen.storyboard in Resources */,
+				C238A5321C569DEA00FEDAE6 /* video_placeholder.png in Resources */,
 				C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */,
 				C2AE04101C3E420900A3E627 /* Assets.xcassets in Resources */,
 				C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */,
@@ -361,6 +376,7 @@
 				C2BE3D461C5496100047C669 /* MJPhotoBrowser.bundle in Resources */,
 				C2BE3D851C563B7A0047C669 /* logout@2x.png in Resources */,
 				C2BE3D581C54E9620047C669 /* reblog@2x.png in Resources */,
+				C238A5301C569DB600FEDAE6 /* play_video@3x.png in Resources */,
 				C2BE3D511C54E60F0047C669 /* like@3x.png in Resources */,
 				C251CF851C53E0460032FE19 /* avatar_placeholder.jpg in Resources */,
 			);

@@ -12,7 +12,7 @@
 #import "DashboardTableViewCell.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
 
@@ -53,7 +53,7 @@
     //初始化参数在这里：
     self.offset = 0;
     self.limit = 20;
-    self.currentType = @"link";
+    self.currentType = @"";
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self mainTableView];
@@ -393,6 +393,13 @@
         //TODO:点击跳转到详细页面
 }
 
+-(void)onVideoImageTapped:(DashboardTableViewCell *)cell{
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    NSDictionary *post = self.dataArray[indexPath.row];
+    
+    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:post[@"video_url"]]];
+    [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+}
 
 #pragma mark - SEL
 -(void)onlogoutBtnClick{
