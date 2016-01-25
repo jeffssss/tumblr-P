@@ -164,7 +164,7 @@
         }
         else{
             NSLog(@"Authentication successful!");
-            //TODO 应该有提示用户登陆成功的框框
+            [[AlertPopupManager sharedManager] postTips:@"登陆成功" withType:@"done"];
             
             //暂存用户的 token
             [[NSUserDefaults standardUserDefaults] setObject:[TMAPIClient sharedInstance].OAuthToken forKey:@"access_token"];
@@ -174,13 +174,7 @@
             MainViewController *mainViewController = [[MainViewController alloc] init];
             UINavigationController *mainControllerNav =  [[UINavigationController alloc] initWithRootViewController:mainViewController];
             
-            [UIView transitionFromView:self.view
-                                toView:mainViewController.view
-                              duration:1
-                               options:UIViewAnimationOptionTransitionFlipFromLeft
-                            completion:^(BOOL finished){
-                [[UIApplication sharedApplication].delegate window].rootViewController = mainControllerNav;
-            }];
+            [[UIApplication sharedApplication].delegate window].rootViewController = mainControllerNav;
         }
 
     }];
