@@ -41,6 +41,8 @@
 		C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D761C5523AF0047C669 /* cross@2x.png */; };
 		C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D771C5523AF0047C669 /* warning.png */; };
 		C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D781C5523AF0047C669 /* warning@2x.png */; };
+		C2BE3D851C563B7A0047C669 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D831C563B7A0047C669 /* logout@2x.png */; };
+		C2BE3D861C563B7A0047C669 /* logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D841C563B7A0047C669 /* logout@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		C2BE3D761C5523AF0047C669 /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		C2BE3D771C5523AF0047C669 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		C2BE3D781C5523AF0047C669 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
+		C2BE3D831C563B7A0047C669 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
+		C2BE3D841C563B7A0047C669 /* logout@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,8 @@
 		C251CF831C53E0360032FE19 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C2BE3D831C563B7A0047C669 /* logout@2x.png */,
+				C2BE3D841C563B7A0047C669 /* logout@3x.png */,
 				C2BE3D731C5523AF0047C669 /* checkmark.png */,
 				C2BE3D741C5523AF0047C669 /* checkmark@2x.png */,
 				C2BE3D751C5523AF0047C669 /* cross.png */,
@@ -349,9 +355,11 @@
 				C2BE3D791C5523AF0047C669 /* checkmark.png in Resources */,
 				C2BE3D541C54E6730047C669 /* like_outline@2x.png in Resources */,
 				C2BE3D551C54E6730047C669 /* like_outline@3x.png in Resources */,
+				C2BE3D861C563B7A0047C669 /* logout@3x.png in Resources */,
 				C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */,
 				C2BE3D7A1C5523AF0047C669 /* checkmark@2x.png in Resources */,
 				C2BE3D461C5496100047C669 /* MJPhotoBrowser.bundle in Resources */,
+				C2BE3D851C563B7A0047C669 /* logout@2x.png in Resources */,
 				C2BE3D581C54E9620047C669 /* reblog@2x.png in Resources */,
 				C2BE3D511C54E60F0047C669 /* like@3x.png in Resources */,
 				C251CF851C53E0460032FE19 /* avatar_placeholder.jpg in Resources */,
