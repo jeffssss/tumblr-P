@@ -45,6 +45,11 @@
     self.title = @"Tumblr-P";
     self.view.backgroundColor = [UIColor redColor];
     
+    //注销
+    UIImage *logoutImg = [UIImage imageNamed:@"logout"];
+    UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithImage:logoutImg style:UIBarButtonItemStylePlain target:self action:@selector(onlogoutBtnClick)];
+    [self.navigationItem setRightBarButtonItem:logoutBtn];
+    
     //初始化参数在这里：
     self.offset = 0;
     self.limit = 20;
@@ -333,6 +338,13 @@
     browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
     browser.photos = newPhotos; // 设置所有的图片
     [browser show];
+}
+#pragma mark - SEL
+-(void)onlogoutBtnClick{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token_secret"];
+    [[AlertPopupManager sharedManager] postTips:@"已退出账号" withType:@"none"];
+    [self directToLoginViewController];
 }
 
 #pragma mark - private
