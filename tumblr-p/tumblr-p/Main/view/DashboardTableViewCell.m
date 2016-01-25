@@ -7,6 +7,7 @@
 //
 
 #import "DashboardTableViewCell.h"
+#import "HTMLLabel.h"
 
 #define topViewHeight 40
 #define cardWidth kScreenWidth - 8*2//两边留8的空
@@ -122,6 +123,8 @@
     }
     
     //middleView
+    //清除原有的
+    [self.middleContentView removeAllSubviews];
     if([data[@"type"] isEqualToString:@"photo"]){
         //修改middleview的frame
         CGFloat middelHeight = [self getHeightAndcreateImageViews:self.middleContentView WithData:data];
@@ -135,6 +138,11 @@
             //选择适当大小的图并放进imageview
             [self setImageWithImageView:imageview AndAltSizes:alt_sizes];
         }
+    } else if([data[@"type"] isEqualToString:@"text"]){
+        //类型为text
+        CGFloat middelHeight = [self getHeightAndSetTitleAndTextarea:self.middleContentView WithData:data];
+        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
+//        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, 100);
     } else {
         NSLog(@"获取到其他type的内容");
     }
@@ -235,10 +243,14 @@
         [self.delegate onImageViewTapped:self imageView:(UIImageView *)sender.view andIndex:(sender.view.tag - CommonTagBase)];
     }
 }
+
+-(void)onSeeDetailBtnClick:(UIButton *)sender{
+    if([self.delegate respondsToSelector:@selector(onTextSeeDetailBtnClick:)]){
+        [self.delegate onTextSeeDetailBtnClick:self];
+    }
+}
 #pragma mark - private
 -(CGFloat)getHeightAndcreateImageViews:(UIView *)parentView WithData:(NSDictionary *)data{
-    //清除原有的
-    [parentView removeAllSubviews];
     
     //解析string
     NSString *layoutString = data[@"photoset_layout"];
@@ -308,5 +320,32 @@
     [imageView sd_setImageWithURL:[NSURL URLWithString:smallerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
 }
 
+-(CGFloat)getHeightAndSetTitleAndTextarea:(UIView *)parentView WithData:(NSDictionary *)data{
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = data[@"title"];
+    titleLabel.textColor = UIColorHex(0x3b3b3b);
+    titleLabel.font = [UIFont systemFontOfSize:20.0];
+    titleLabel.numberOfLines = 0;
+    [parentView addSubview:titleLabel];
+    CGSize titleSize = [titleLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
+    titleLabel.frame = CGRectMake(0, 5, parentView.width, titleSize.height + 5*2);
+
+//    HTMLLabel * bodyLabel = [[HTMLLabel alloc] init];
+//    bodyLabel.text = data[@"body"];
+//    NSLog(@"***********************\n%@\n****************************************",data[@"body"]);
+//    CGSize bodySize = [bodyLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
+//    bodyLabel.frame = CGRectMake(0, titleLabel.bottom, titleLabel.width, bodySize.height);
+//    [parentView addSubview:bodyLabel];
+    UIButton *seeDetailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, titleLabel.bottom, 100, 30)];
+    [seeDetailBtn setTitle:@"点击查看内容" forState:UIControlStateNormal];
+    [seeDetailBtn setTitleColor:UIColorHex(0x828282) forState:UIControlStateNormal];
+    [seeDetailBtn setTitleColor:UIColorHex(0xB5B5B5) forState:UIControlStateHighlighted];
+    [seeDetailBtn setTarget:self action:@selector(onSeeDetailBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    seeDetailBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [parentView addSubview:seeDetailBtn];
+    
+    return seeDetailBtn.bottom;
+}
 
 @end

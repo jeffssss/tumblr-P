@@ -21,6 +21,9 @@
 -(void)onReblogBtnClick:(DashboardTableViewCell *)cell;
 
 -(void)onImageViewTapped:(DashboardTableViewCell *)cell imageView:(UIImageView *)imageView andIndex:(NSInteger)index;
+
+-(void)onTextSeeDetailBtnClick:(DashboardTableViewCell *)cell;
+
 @end
 
 @interface DashboardTableViewCell : UITableViewCell

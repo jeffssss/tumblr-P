@@ -53,7 +53,7 @@
     //初始化参数在这里：
     self.offset = 0;
     self.limit = 20;
-    self.currentType = @"photo";
+    self.currentType = @"text";
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self mainTableView];
@@ -388,6 +388,12 @@
     browser.photos = newPhotos; // 设置所有的图片
     [browser show];
 }
+
+-(void)onTextSeeDetailBtnClick:(DashboardTableViewCell *)cell{
+        //TODO:点击跳转到详细页面
+}
+
+
 #pragma mark - SEL
 -(void)onlogoutBtnClick{
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token"];
