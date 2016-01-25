@@ -53,7 +53,7 @@
     //初始化参数在这里：
     self.offset = 0;
     self.limit = 20;
-    self.currentType = @"text";
+    self.currentType = @"link";
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self mainTableView];

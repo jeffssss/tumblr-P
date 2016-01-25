@@ -7,7 +7,6 @@
 //
 
 #import "DashboardTableViewCell.h"
-#import "HTMLLabel.h"
 
 #define topViewHeight 40
 #define cardWidth kScreenWidth - 8*2//两边留8的空
@@ -138,11 +137,14 @@
             //选择适当大小的图并放进imageview
             [self setImageWithImageView:imageview AndAltSizes:alt_sizes];
         }
-    } else if([data[@"type"] isEqualToString:@"text"]){
-        //类型为text
-        CGFloat middelHeight = [self getHeightAndSetTitleAndTextarea:self.middleContentView WithData:data];
+    } else if([data[@"type"] isEqualToString:@"text"] || [data[@"type"] isEqualToString:@"chat"]){
+        //类型为text或者为chat
+        CGFloat middelHeight = [self getHeightAndSetTitle:self.middleContentView WithData:data];
         self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
 //        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, 100);
+    } else if([data[@"type"] isEqualToString:@"link"]){
+        CGFloat middelHeight = [self getHeightAndSetLinkInfo:self.middleContentView WithData:data];
+        self.middleContentView.frame = CGRectMake(0, self.topView.bottom, self.topView.width, middelHeight);
     } else {
         NSLog(@"获取到其他type的内容");
     }
@@ -320,29 +322,83 @@
     [imageView sd_setImageWithURL:[NSURL URLWithString:smallerImage[@"url"]] placeholderImage:[UIImage imageNamed:@"pic_placeholder.png"]];
 }
 
--(CGFloat)getHeightAndSetTitleAndTextarea:(UIView *)parentView WithData:(NSDictionary *)data{
+-(CGFloat)getHeightAndSetTitle:(UIView *)parentView WithData:(NSDictionary *)data{
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = data[@"title"];
+    if([data[@"title"] isEqual:[NSNull null]]){
+        titleLabel.text = @" ";
+    } else {
+        titleLabel.text = data[@"title"];
+    }
+    
     titleLabel.textColor = UIColorHex(0x3b3b3b);
     titleLabel.font = [UIFont systemFontOfSize:20.0];
     titleLabel.numberOfLines = 0;
     [parentView addSubview:titleLabel];
     CGSize titleSize = [titleLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
-    titleLabel.frame = CGRectMake(0, 5, parentView.width, titleSize.height + 5*2);
+    titleLabel.frame = CGRectMake(0, 0, parentView.width, titleSize.height + 5*2);
 
-//    HTMLLabel * bodyLabel = [[HTMLLabel alloc] init];
-//    bodyLabel.text = data[@"body"];
-//    NSLog(@"***********************\n%@\n****************************************",data[@"body"]);
-//    CGSize bodySize = [bodyLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
-//    bodyLabel.frame = CGRectMake(0, titleLabel.bottom, titleLabel.width, bodySize.height);
-//    [parentView addSubview:bodyLabel];
     UIButton *seeDetailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, titleLabel.bottom, 100, 30)];
     [seeDetailBtn setTitle:@"点击查看内容" forState:UIControlStateNormal];
     [seeDetailBtn setTitleColor:UIColorHex(0x828282) forState:UIControlStateNormal];
     [seeDetailBtn setTitleColor:UIColorHex(0xB5B5B5) forState:UIControlStateHighlighted];
     [seeDetailBtn setTarget:self action:@selector(onSeeDetailBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     seeDetailBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [parentView addSubview:seeDetailBtn];
+    
+    return seeDetailBtn.bottom;
+}
+
+-(CGFloat)getHeightAndSetLinkInfo:(UIView *)parentView WithData:(NSDictionary *)data{
+    
+    //title
+    UILabel *titleLabel = [[UILabel alloc] init];
+    if([data[@"title"] isEqual:[NSNull null]]){
+        titleLabel.text = @" ";
+    } else {
+        titleLabel.text = data[@"title"];
+    }
+    titleLabel.textColor = UIColorHex(0x3b3b3b);
+    titleLabel.font = [UIFont systemFontOfSize:20.0];
+    titleLabel.numberOfLines = 0;
+    [parentView addSubview:titleLabel];
+    CGSize titleSize = [titleLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
+    titleLabel.frame = CGRectMake(0, 0, parentView.width, titleSize.height + 5*2);
+    
+    //excerpt
+    UILabel *excerptLabel = [[UILabel alloc] init];
+    if([data[@"excerpt"] isEqual:[NSNull null]]){
+        excerptLabel.text = @" ";
+    } else {
+        excerptLabel.text = data[@"excerpt"];
+    }
+    excerptLabel.textColor = UIColorHex(0x3b3b3b);
+    excerptLabel.font = [UIFont systemFontOfSize:16.0];
+    excerptLabel.numberOfLines = 0;
+    [parentView addSubview:excerptLabel];
+    CGSize excerptSize = [excerptLabel sizeThatFits:CGSizeMake(parentView.width, MAXFLOAT)];
+    excerptLabel.frame = CGRectMake(0, titleLabel.bottom, parentView.width, excerptSize.height + 5*2);
+    
+    //publisher
+    CGFloat currentHeight = 0;
+    if( nil != data[@"publisher"] &&  ![data[@"publisher"] isEqual:[NSNull null]]){
+        NSString *publisherString = [NSString stringWithFormat:@"Publisher: %@",data[@"publisher"]];
+        UILabel *publisherLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, excerptLabel.bottom, excerptLabel.width, 20)];
+        publisherLabel.text = publisherString;
+        publisherLabel.textColor = UIColorHex(0x9C9C9C);
+        publisherLabel.font = [UIFont systemFontOfSize:15.0];
+        [parentView addSubview:publisherLabel];
+        currentHeight = publisherLabel.bottom;
+    } else {
+        currentHeight = excerptLabel.bottom;
+    }
+    
+    UIButton *seeDetailBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, currentHeight, 100, 30)];
+    [seeDetailBtn setTitle:@"点击查看内容" forState:UIControlStateNormal];
+    [seeDetailBtn setTitleColor:UIColorHex(0x828282) forState:UIControlStateNormal];
+    [seeDetailBtn setTitleColor:UIColorHex(0xB5B5B5) forState:UIControlStateHighlighted];
+    [seeDetailBtn setTarget:self action:@selector(onSeeDetailBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    seeDetailBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [parentView addSubview:seeDetailBtn];
     
     return seeDetailBtn.bottom;
