@@ -7,3 +7,4 @@ pod 'MJRefresh'
 pod 'MBProgressHUD', '~> 0.9.1'
 pod "YYCategories"
 pod 'NJKWebViewProgress'
+pod 'BKPasscodeView', '~> 0.1.2'

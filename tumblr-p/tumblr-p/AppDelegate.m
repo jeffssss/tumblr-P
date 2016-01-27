@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
+#import <BKPasscodeView/BKPasscodeLockScreenManager.h>
+#import "TPPasscodeViewController.h"
+
+NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
+
 
 @interface AppDelegate ()
 
@@ -25,9 +30,34 @@
     
     [self checkLogin];
     
+    //设置密码
+    [[NSUserDefaults standardUserDefaults] setObject:@"1213" forKey:@"privacy_password"];
+    
+    //设置锁屏
+    [[BKPasscodeLockScreenManager sharedManager] setDelegate:self];
+    
     [self.window makeKeyAndVisible];
     
+    //开始就显示密码登陆,太快了会报错：`Unbalanced calls to begin/end appearance transitions for`
+    [self performSelector:@selector(checkPassword) withObject:self afterDelay:0.5];
+    
     return YES;
+}
+
+-(void)checkPassword{
+    //开始就显示密码登陆
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"privacy_password"]){
+        TPPasscodeViewController *viewController = [[TPPasscodeViewController alloc] initWithNibName:nil bundle:nil];
+        viewController.type = BKPasscodeViewControllerCheckPasscodeType;
+        viewController.delegate = self;
+        viewController.passcodeStyle = BKPasscodeInputViewNumericPasscodeStyle;
+        viewController.touchIDManager = [[BKTouchIDManager alloc] initWithKeychainServiceName:BKPasscodeKeychainServiceName];
+        viewController.touchIDManager.promptText = @"使用指纹解锁";
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        
+        [self.window.rootViewController presentViewController:navController animated:NO completion:nil];
+        [navController.view.superview bringSubviewToFront:navController.view];
+    }
 }
 
 -(void)checkLogin{
@@ -61,6 +91,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[BKPasscodeLockScreenManager sharedManager] showLockScreen:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -75,4 +106,41 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)lockScreenManagerShouldShowLockScreen:(BKPasscodeLockScreenManager *)aManager
+{
+    return YES;   // return NO if you don't want to present lock screen.
+}
+
+- (UIViewController *)lockScreenManagerPasscodeViewController:(BKPasscodeLockScreenManager *)aManager{
+    TPPasscodeViewController *viewController = [[TPPasscodeViewController alloc] initWithNibName:nil bundle:nil];
+    viewController.type = BKPasscodeViewControllerCheckPasscodeType;
+    viewController.delegate = self;
+    viewController.passcodeStyle = BKPasscodeInputViewNumericPasscodeStyle;
+    viewController.touchIDManager = [[BKTouchIDManager alloc] initWithKeychainServiceName:BKPasscodeKeychainServiceName];
+    viewController.touchIDManager.promptText = @"使用指纹解锁";
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    return navController;
+}
+#pragma mark -  BKPasscodeViewControllerDelegate
+
+/**
+ * Tells the delegate that passcode is created or authenticated successfully.
+ */
+- (void)passcodeViewController:(BKPasscodeViewController *)aViewController didFinishWithPasscode:(NSString *)aPasscode{
+    [aViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**
+ * Ask the delegate to verify that a passcode is correct. You must call the resultHandler with result.
+ * You can check passcode asynchronously and show progress view (e.g. UIActivityIndicator) in the view controller if authentication takes too long.
+ * You must call result handler in main thread.
+ */
+- (void)passcodeViewController:(BKPasscodeViewController *)aViewController authenticatePasscode:(NSString *)aPasscode resultHandler:(void(^)(BOOL succeed))aResultHandler{
+    if ([aPasscode isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"privacy_password"]]) {
+        aResultHandler(YES);
+    } else {
+        aResultHandler(NO);
+    }
+}
 @end

@@ -12,6 +12,11 @@
 		C238A52F1C569DB600FEDAE6 /* play_video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A52D1C569DB600FEDAE6 /* play_video@2x.png */; };
 		C238A5301C569DB600FEDAE6 /* play_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A52E1C569DB600FEDAE6 /* play_video@3x.png */; };
 		C238A5321C569DEA00FEDAE6 /* video_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5311C569DEA00FEDAE6 /* video_placeholder.png */; };
+		C238A5351C5907FC00FEDAE6 /* TPPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C238A5341C5907FC00FEDAE6 /* TPPasscodeViewController.m */; };
+		C238A53A1C59151200FEDAE6 /* p_unfill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5361C59151200FEDAE6 /* p_unfill@2x.png */; };
+		C238A53B1C59151200FEDAE6 /* p_unfill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5371C59151200FEDAE6 /* p_unfill@3x.png */; };
+		C238A53C1C59151200FEDAE6 /* p_fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5381C59151200FEDAE6 /* p_fill@2x.png */; };
+		C238A53D1C59151200FEDAE6 /* p_fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C238A5391C59151200FEDAE6 /* p_fill@3x.png */; };
 		C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C251CF3C1C4E51D90032FE19 /* MainViewController.m */; };
 		C251CF401C4E52260032FE19 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C251CF3F1C4E52260032FE19 /* LoginViewController.m */; };
 		C251CF7F1C5148930032FE19 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C251CF7E1C5148930032FE19 /* Reveal.framework */; };
@@ -57,6 +62,12 @@
 		C238A52D1C569DB600FEDAE6 /* play_video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video@2x.png"; sourceTree = "<group>"; };
 		C238A52E1C569DB600FEDAE6 /* play_video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video@3x.png"; sourceTree = "<group>"; };
 		C238A5311C569DEA00FEDAE6 /* video_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_placeholder.png; sourceTree = "<group>"; };
+		C238A5331C5907FC00FEDAE6 /* TPPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPasscodeViewController.h; sourceTree = "<group>"; };
+		C238A5341C5907FC00FEDAE6 /* TPPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPasscodeViewController.m; sourceTree = "<group>"; };
+		C238A5361C59151200FEDAE6 /* p_unfill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_unfill@2x.png"; sourceTree = "<group>"; };
+		C238A5371C59151200FEDAE6 /* p_unfill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_unfill@3x.png"; sourceTree = "<group>"; };
+		C238A5381C59151200FEDAE6 /* p_fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_fill@2x.png"; sourceTree = "<group>"; };
+		C238A5391C59151200FEDAE6 /* p_fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_fill@3x.png"; sourceTree = "<group>"; };
 		C251CF3B1C4E51D90032FE19 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C251CF3C1C4E51D90032FE19 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C251CF3E1C4E52260032FE19 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -152,6 +163,8 @@
 				C251CF3C1C4E51D90032FE19 /* MainViewController.m */,
 				C251CF3E1C4E52260032FE19 /* LoginViewController.h */,
 				C251CF3F1C4E52260032FE19 /* LoginViewController.m */,
+				C238A5331C5907FC00FEDAE6 /* TPPasscodeViewController.h */,
+				C238A5341C5907FC00FEDAE6 /* TPPasscodeViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -184,6 +197,10 @@
 		C251CF831C53E0360032FE19 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C238A5361C59151200FEDAE6 /* p_unfill@2x.png */,
+				C238A5371C59151200FEDAE6 /* p_unfill@3x.png */,
+				C238A5381C59151200FEDAE6 /* p_fill@2x.png */,
+				C238A5391C59151200FEDAE6 /* p_fill@3x.png */,
 				C238A52D1C569DB600FEDAE6 /* play_video@2x.png */,
 				C238A52E1C569DB600FEDAE6 /* play_video@3x.png */,
 				C238A5311C569DEA00FEDAE6 /* video_placeholder.png */,
@@ -363,8 +380,11 @@
 				C2BE3D4D1C54D0970047C669 /* pic_placeholder.png in Resources */,
 				C2AE04131C3E420900A3E627 /* LaunchScreen.storyboard in Resources */,
 				C238A5321C569DEA00FEDAE6 /* video_placeholder.png in Resources */,
+				C238A53B1C59151200FEDAE6 /* p_unfill@3x.png in Resources */,
+				C238A53D1C59151200FEDAE6 /* p_fill@3x.png in Resources */,
 				C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */,
 				C2AE04101C3E420900A3E627 /* Assets.xcassets in Resources */,
+				C238A53C1C59151200FEDAE6 /* p_fill@2x.png in Resources */,
 				C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */,
 				C2BE3D501C54E60F0047C669 /* like@2x.png in Resources */,
 				C2BE3D791C5523AF0047C669 /* checkmark.png in Resources */,
@@ -374,6 +394,7 @@
 				C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */,
 				C2BE3D7A1C5523AF0047C669 /* checkmark@2x.png in Resources */,
 				C2BE3D461C5496100047C669 /* MJPhotoBrowser.bundle in Resources */,
+				C238A53A1C59151200FEDAE6 /* p_unfill@2x.png in Resources */,
 				C2BE3D851C563B7A0047C669 /* logout@2x.png in Resources */,
 				C2BE3D581C54E9620047C669 /* reblog@2x.png in Resources */,
 				C238A5301C569DB600FEDAE6 /* play_video@3x.png in Resources */,
@@ -447,6 +468,7 @@
 				C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */,
 				C2BE3D451C5496100047C669 /* MJPhoto.m in Sources */,
 				C2AE04081C3E420800A3E627 /* AppDelegate.m in Sources */,
+				C238A5351C5907FC00FEDAE6 /* TPPasscodeViewController.m in Sources */,
 				C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */,
 				C2BE3D4A1C5496100047C669 /* MJPhotoToolbar.m in Sources */,
 				C251CF821C5350850032FE19 /* DashboardTableViewCell.m in Sources */,

@@ -17,6 +17,7 @@
     BOOL _doubleTap;
     UIImageView *_imageView;
     MJPhotoLoadingView *_photoLoadingView;
+    BOOL isHidden;//增加状态量 防止野指针http://blog.csdn.net/woyangyi/article/details/47106403
 }
 @end
 
@@ -105,12 +106,15 @@
         // 直接显示进度条
         [_photoLoadingView showLoading];
         [self addSubview:_photoLoadingView];
+        isHidden = NO;
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
         [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
             if (receivedSize > kMinProgress) {
-                loading.progress = (float)receivedSize/expectedSize;
+                if(!isHidden){
+                    loading.progress = (float)receivedSize/expectedSize;
+                }
             }
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
             [photoView photoDidFinishLoadWithImage:image];
@@ -132,12 +136,13 @@
         self.scrollEnabled = YES;
         _photo.image = image;
         [_photoLoadingView removeFromSuperview];
-        
+        isHidden = YES;
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewImageFinishLoad:)]) {
             [self.photoViewDelegate photoViewImageFinishLoad:self];
         }
     } else {
         [self addSubview:_photoLoadingView];
+        isHidden = NO;
         [_photoLoadingView showFailure];
     }
     
@@ -226,6 +231,7 @@
     // 移除进度条
     [_photoLoadingView removeFromSuperview];
     self.contentOffset = CGPointZero;
+    isHidden = YES;
     
     // 清空底部的小图
     _photo.srcImageView.image = nil;
