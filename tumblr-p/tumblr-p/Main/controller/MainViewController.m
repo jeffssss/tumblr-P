@@ -13,6 +13,8 @@
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <BBBadgeBarButtonItem/BBBadgeBarButtonItem.h>
+
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
 
@@ -31,12 +33,17 @@
 //tableview数据源
 @property(nonatomic,strong) NSMutableArray  *dataArray;
 
+//menu
+@property(nonatomic,strong) NSArray         *menuCellArray;
+@property(nonatomic,assign) BOOL            menuCellHidden;
+@property(nonatomic,strong) UIView          *maskView;
 
 @end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
+    NSLog(@"main view did load;");
     [super viewDidLoad];
     //设置bar style
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
@@ -46,19 +53,33 @@
     self.view.backgroundColor = [UIColor redColor];
     
     //注销
-    UIImage *logoutImg = [UIImage imageNamed:@"logout"];
+    UIImage *logoutImg = [UIImage imageNamed:@"logout_icon"];
     UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithImage:logoutImg style:UIBarButtonItemStylePlain target:self action:@selector(onlogoutBtnClick)];
-    [self.navigationItem setRightBarButtonItem:logoutBtn];
+    //选种类
+    BBBadgeBarButtonItem *typeBtn = [[BBBadgeBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"type_all"] style:UIBarButtonItemStylePlain target:self action:@selector(onTypeBtnClick:)];
+    [self.navigationItem setRightBarButtonItems:@[typeBtn,logoutBtn]];
+    
+    
     
     //初始化参数在这里：
     self.offset = 0;
     self.limit = 20;
     self.currentType = @"";
     self.dataArray = [[NSMutableArray alloc] init];
-    
+
     [self mainTableView];
     //打印一下token
     NSLog(@"token:%@\nsecret:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"],[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token_secret"]);
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@" main viewWillAppear");
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@" main viewDidAppear");
 }
 #pragma mark - getter
 -(UITableView *)mainTableView{
@@ -224,6 +245,53 @@
     return _mainTableView;
 }
 
+-(NSArray *)menuCellArray{
+    if(nil == _menuCellArray){
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:2];
+        //暂时就仅仅选photo和video all
+        UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth*2.0/3.0 -20, -50, kScreenWidth/3.0 + 20, 50)];
+        [btn1 setTitle:@"Photo" forState:UIControlStateNormal];
+        [btn1 setTarget:self action:@selector(onMenuCellClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn1 setBackgroundColor:UIColorHex(0x4F94CD)];
+        btn1.layer.cornerRadius = 4.0;
+        [self.view addSubview:btn1];
+        
+        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth*2.0/3.0 -20, -50, kScreenWidth/3.0 + 20, 50)];
+        [btn2 setTitle:@"Video" forState:UIControlStateNormal];
+        [btn2 setTarget:self action:@selector(onMenuCellClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn2 setBackgroundColor:UIColorHex(0x8B0A50)];
+        btn2.layer.cornerRadius = 4.0;
+        [self.view addSubview:btn2];
+        
+        UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth*2.0/3.0 -20, -50, kScreenWidth/3.0 + 20, 50)];
+        [btn3 setTitle:@"All" forState:UIControlStateNormal];
+        [btn3 setTarget:self action:@selector(onMenuCellClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn3 setBackgroundColor:UIColorHex(0x36465d)];
+        btn3.layer.cornerRadius = 4.0;
+        [self.view addSubview:btn3];
+        
+        [array addObject:btn1];
+        [array addObject:btn2];
+        [array addObject:btn3];
+        
+        _menuCellArray = [array copy];
+        self.menuCellHidden = YES;
+    }
+    return _menuCellArray;
+}
+
+-(UIView *)maskView{
+    if(nil == _maskView){
+        _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _maskView.backgroundColor = RGBA(0, 0, 0, 0.4);
+        _maskView.userInteractionEnabled = YES;
+        [_maskView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(id sender) {
+            [self hideMenu];
+            [self.maskView removeFromSuperview];
+        }]];
+    }
+    return _maskView;
+}
 #pragma mark - UITableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
@@ -407,6 +475,75 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token_secret"];
     [[AlertPopupManager sharedManager] postTips:@"已退出账号" withType:@"none"];
     [self directToLoginViewController];
+}
+
+-(void)onTypeBtnClick:(UIButton *)sender{
+    if(self.menuCellHidden){
+        [self showMenu];
+    } else {
+        [self hideMenu];
+    }
+}
+-(void)onMenuCellClick:(UIButton *)sender{
+    self.offset = 0;
+    self.limit = 20;
+    self.sinceId = 0;
+    if([sender.titleLabel.text isEqualToString:@"All"]){
+        self.currentType = @"";
+    } else if([sender.titleLabel.text isEqualToString:@"Photo"]){
+        self.currentType = @"photo";
+    } else if([sender.titleLabel.text isEqualToString:@"Video"]){
+        self.currentType = @"video";
+    }
+    self.mainTableView.backgroundColor = sender.backgroundColor;
+    [self hideMenu];
+    [self.mainTableView.mj_header beginRefreshing];
+}
+
+-(void)showMenu {
+    [self.view addSubview:self.maskView];
+    self.menuCellHidden = NO;
+
+    for(int i = 0 ; i < self.menuCellArray.count ; i++){
+        UIButton *button = self.menuCellArray[i];
+        [UIView animateWithDuration:0.4
+                              delay:0.1*i
+             usingSpringWithDamping:1.0
+              initialSpringVelocity:4.0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             CGRect frame = button.frame;
+                             frame.origin.y =i*50;
+                             button.frame = frame;
+                             [self.view bringSubviewToFront:button];
+                         }
+                         completion:^(BOOL finished){
+                         }];
+    }
+    [UIView commitAnimations];
+    
+}
+
+- (void) hideMenu {
+    self.menuCellHidden = YES;
+    [self.maskView removeFromSuperview];
+    for(int i = 0 ; i < self.menuCellArray.count ; i++){
+        UIButton *button = self.menuCellArray[i];
+        [UIView animateWithDuration:0.4
+                              delay:0.0
+             usingSpringWithDamping:1.0
+              initialSpringVelocity:4.0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             CGRect frame = button.frame;
+                             frame.origin.y = -50;
+                             button.frame = frame;
+                         }
+                         completion:^(BOOL finished){
+                         }];
+    }
+    [UIView commitAnimations];
+    
 }
 
 #pragma mark - private
