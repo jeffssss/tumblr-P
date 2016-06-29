@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "NJKWebViewProgressView.h"
 #import "NJKWebViewProgress.h"
+#import "SettingViewController.h"
 
 @interface LoginViewController ()<UIWebViewDelegate, NJKWebViewProgressDelegate>
 
@@ -39,9 +40,10 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.translucent = NO;
 //    [self.navigationController setNavigationBarHidden:YES];
-    
+    UIBarButtonItem *settingBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(onSettingBtnClick)];
     self.title = @"登陆";
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationItem setRightBarButtonItems:@[settingBtn]];
     [self loginView];
 }
 
@@ -186,6 +188,10 @@
 {
     [self.progressView setProgress:progress animated:YES];
     NSLog(@"progress:%f",progress);
+}
+
+-(void)onSettingBtnClick{
+    [self.navigationController pushViewController:[[SettingViewController alloc] init] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

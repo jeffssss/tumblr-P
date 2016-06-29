@@ -54,6 +54,14 @@
 		C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D761C5523AF0047C669 /* cross@2x.png */; };
 		C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D771C5523AF0047C669 /* warning.png */; };
 		C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D781C5523AF0047C669 /* warning@2x.png */; };
+		C2CFE3FC1D21587C000E40A7 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */; };
+		C2E28B791D22C120009DC211 /* libev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E28B781D22C120009DC211 /* libev.a */; };
+		C2E28C2E1D22E53F009DC211 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C211D22E53F009DC211 /* table.m */; };
+		C2E28C311D22E53F009DC211 /* SimpleTableViewSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C271D22E53F009DC211 /* SimpleTableViewSource.m */; };
+		C2E28C321D22E53F009DC211 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C291D22E53F009DC211 /* QRCodeViewController.m */; };
+		C2E28C371D22EB2D009DC211 /* local.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C361D22EB2D009DC211 /* local.m */; };
+		C2E28C3A1D22EB58009DC211 /* encrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C391D22EB58009DC211 /* encrypt.c */; };
+		C2E28C401D22EC0E009DC211 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C3E1D22EC0E009DC211 /* ShadowsocksRunner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +133,27 @@
 		C2BE3D761C5523AF0047C669 /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		C2BE3D771C5523AF0047C669 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		C2BE3D781C5523AF0047C669 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
+		C2CFE3FA1D21587C000E40A7 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		C2E28B3F1D219BE5009DC211 /* libev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libev.a; path = ../../../../../usr/local/lib/libev.a; sourceTree = "<group>"; };
+		C2E28B411D219C3F009DC211 /* libev.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libev.4.dylib; path = ../../../../../usr/local/lib/libev.4.dylib; sourceTree = "<group>"; };
+		C2E28B781D22C120009DC211 /* libev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libev.a; sourceTree = "<group>"; };
+		C2E28B7B1D22CB40009DC211 /* ev.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ev.h; sourceTree = "<group>"; };
+		C2E28B7C1D22CB40009DC211 /* ev++.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ev++.h"; sourceTree = "<group>"; };
+		C2E28B7D1D22CB40009DC211 /* event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		C2E28C201D22E53F009DC211 /* table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
+		C2E28C211D22E53F009DC211 /* table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = table.m; sourceTree = "<group>"; };
+		C2E28C241D22E53F009DC211 /* socks5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socks5.h; sourceTree = "<group>"; };
+		C2E28C271D22E53F009DC211 /* SimpleTableViewSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableViewSource.m; sourceTree = "<group>"; };
+		C2E28C281D22E53F009DC211 /* SimpleTableViewSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableViewSource.h; sourceTree = "<group>"; };
+		C2E28C291D22E53F009DC211 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		C2E28C2A1D22E53F009DC211 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		C2E28C351D22EB2D009DC211 /* local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local.h; sourceTree = "<group>"; };
+		C2E28C361D22EB2D009DC211 /* local.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = local.m; sourceTree = "<group>"; };
+		C2E28C381D22EB58009DC211 /* encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encrypt.h; sourceTree = "<group>"; };
+		C2E28C391D22EB58009DC211 /* encrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encrypt.c; sourceTree = "<group>"; };
+		C2E28C3E1D22EC0E009DC211 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowsocksRunner.m; sourceTree = "<group>"; };
+		C2E28C3F1D22EC0E009DC211 /* ShadowsocksRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowsocksRunner.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E28B791D22C120009DC211 /* libev.a in Frameworks */,
 				C238A5221C56718A00FEDAE6 /* MediaPlayer.framework in Frameworks */,
 				A8DD626E11EE98C012D9B900 /* libPods.a in Frameworks */,
 				C251CF7F1C5148930032FE19 /* Reveal.framework in Frameworks */,
@@ -169,6 +199,8 @@
 				C251CF3F1C4E52260032FE19 /* LoginViewController.m */,
 				C238A5331C5907FC00FEDAE6 /* TPPasscodeViewController.h */,
 				C238A5341C5907FC00FEDAE6 /* TPPasscodeViewController.m */,
+				C2CFE3FA1D21587C000E40A7 /* SettingViewController.h */,
+				C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -192,6 +224,8 @@
 		C251CF751C5123220032FE19 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C2E28B071D219309009DC211 /* libev */,
+				C2CFE3FD1D215DAD000E40A7 /* shadowsocks */,
 				C2BE3D701C55208B0047C669 /* AlertPopupManager.h */,
 				C2BE3D711C55208B0047C669 /* AlertPopupManager.m */,
 			);
@@ -309,9 +343,42 @@
 			path = MJPhotoBrowser;
 			sourceTree = "<group>";
 		};
+		C2CFE3FD1D215DAD000E40A7 /* shadowsocks */ = {
+			isa = PBXGroup;
+			children = (
+				C2E28C381D22EB58009DC211 /* encrypt.h */,
+				C2E28C391D22EB58009DC211 /* encrypt.c */,
+				C2E28C351D22EB2D009DC211 /* local.h */,
+				C2E28C361D22EB2D009DC211 /* local.m */,
+				C2E28C201D22E53F009DC211 /* table.h */,
+				C2E28C211D22E53F009DC211 /* table.m */,
+				C2E28C241D22E53F009DC211 /* socks5.h */,
+				C2E28C271D22E53F009DC211 /* SimpleTableViewSource.m */,
+				C2E28C281D22E53F009DC211 /* SimpleTableViewSource.h */,
+				C2E28C291D22E53F009DC211 /* QRCodeViewController.m */,
+				C2E28C2A1D22E53F009DC211 /* QRCodeViewController.h */,
+				C2E28C3E1D22EC0E009DC211 /* ShadowsocksRunner.m */,
+				C2E28C3F1D22EC0E009DC211 /* ShadowsocksRunner.h */,
+			);
+			path = shadowsocks;
+			sourceTree = "<group>";
+		};
+		C2E28B071D219309009DC211 /* libev */ = {
+			isa = PBXGroup;
+			children = (
+				C2E28B781D22C120009DC211 /* libev.a */,
+				C2E28B7B1D22CB40009DC211 /* ev.h */,
+				C2E28B7C1D22CB40009DC211 /* ev++.h */,
+				C2E28B7D1D22CB40009DC211 /* event.h */,
+			);
+			path = libev;
+			sourceTree = "<group>";
+		};
 		DF3DF2F121F80443F1B8825C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2E28B411D219C3F009DC211 /* libev.4.dylib */,
+				C2E28B3F1D219BE5009DC211 /* libev.a */,
 				C238A5211C56718A00FEDAE6 /* MediaPlayer.framework */,
 				C251CF7E1C5148930032FE19 /* Reveal.framework */,
 				3442E7B33E172CFBD3A47C24 /* libPods.a */,
@@ -467,17 +534,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2BE3D471C5496100047C669 /* MJPhotoBrowser.m in Sources */,
+				C2E28C3A1D22EB58009DC211 /* encrypt.c in Sources */,
 				C2BE3D621C54EC4C0047C669 /* MBProgressHUD+Add.m in Sources */,
+				C2CFE3FC1D21587C000E40A7 /* SettingViewController.m in Sources */,
 				C2BE3D4B1C5496100047C669 /* MJPhotoView.m in Sources */,
 				C2BE3D5E1C54EC200047C669 /* SDWebImageManager+MJ.m in Sources */,
 				C2BE3D481C5496100047C669 /* MJPhotoLoadingView.m in Sources */,
+				C2E28C401D22EC0E009DC211 /* ShadowsocksRunner.m in Sources */,
+				C2E28C2E1D22E53F009DC211 /* table.m in Sources */,
 				C251CF401C4E52260032FE19 /* LoginViewController.m in Sources */,
 				C2BE3D491C5496100047C669 /* MJPhotoProgressView.m in Sources */,
 				C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */,
 				C2BE3D451C5496100047C669 /* MJPhoto.m in Sources */,
 				C2AE04081C3E420800A3E627 /* AppDelegate.m in Sources */,
+				C2E28C371D22EB2D009DC211 /* local.m in Sources */,
 				C238A5351C5907FC00FEDAE6 /* TPPasscodeViewController.m in Sources */,
+				C2E28C311D22E53F009DC211 /* SimpleTableViewSource.m in Sources */,
 				C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */,
+				C2E28C321D22E53F009DC211 /* QRCodeViewController.m in Sources */,
 				C2BE3D4A1C5496100047C669 /* MJPhotoToolbar.m in Sources */,
 				C251CF821C5350850032FE19 /* DashboardTableViewCell.m in Sources */,
 				C2BE3D5F1C54EC200047C669 /* UIImageView+MJWebCache.m in Sources */,
@@ -538,6 +612,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -574,6 +649,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -583,17 +659,45 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B719D1C1E1FABB7AF425F766 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/tumblr-p/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFViewShaker\"",
+					"\"${PODS_ROOT}/Headers/Public/BBBadgeBarButtonItem\"",
+					"\"${PODS_ROOT}/Headers/Public/BKPasscodeView\"",
+					"\"${PODS_ROOT}/Headers/Public/JXHTTP\"",
+					"\"${PODS_ROOT}/Headers/Public/KLCPopup\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/NJKWebViewProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/NSData+Base64\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/Spectacles\"",
+					"\"${PODS_ROOT}/Headers/Public/TMTumblrSDK\"",
+					"\"${PODS_ROOT}/Headers/Public/WebViewProxy\"",
+					"\"${PODS_ROOT}/Headers/Public/YYCategories\"",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/libsodium\"",
+				);
 				INFOPLIST_FILE = "tumblr-p/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tumblr-p/Other/libev",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -630,7 +734,7 @@
 					"-framework",
 					Reveal,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JF.tumblr-p";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whs.tumblr-p";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -640,17 +744,44 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 95198390EC90588F47863C7B /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/tumblr-p/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFViewShaker\"",
+					"\"${PODS_ROOT}/Headers/Public/BBBadgeBarButtonItem\"",
+					"\"${PODS_ROOT}/Headers/Public/BKPasscodeView\"",
+					"\"${PODS_ROOT}/Headers/Public/JXHTTP\"",
+					"\"${PODS_ROOT}/Headers/Public/KLCPopup\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/NJKWebViewProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/NSData+Base64\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/Spectacles\"",
+					"\"${PODS_ROOT}/Headers/Public/TMTumblrSDK\"",
+					"\"${PODS_ROOT}/Headers/Public/WebViewProxy\"",
+					"\"${PODS_ROOT}/Headers/Public/YYCategories\"",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/libsodium\"",
+				);
 				INFOPLIST_FILE = "tumblr-p/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tumblr-p/Other/libev",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -687,7 +818,7 @@
 					"-framework",
 					Reveal,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.JF.tumblr-p";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.whs.tumblr-p";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

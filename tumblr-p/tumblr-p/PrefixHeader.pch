@@ -9,6 +9,9 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "Macro.h"
 #import <YYCategories/YYCategories.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -17,4 +20,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <KLCPopup/KLCPopup.h>
 #import "AlertPopupManager.h"
+#endif
+
+
 #endif /* PrefixHeader_pch */

@@ -66,7 +66,7 @@
     self.limit = 20;
     self.currentType = @"";
     self.dataArray = [[NSMutableArray alloc] init];
-
+    self.menuCellHidden = YES;
     [self mainTableView];
     //打印一下token
     NSLog(@"token:%@\nsecret:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"],[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token_secret"]);
