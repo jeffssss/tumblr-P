@@ -62,6 +62,12 @@
 		C2E28C371D22EB2D009DC211 /* local.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C361D22EB2D009DC211 /* local.m */; };
 		C2E28C3A1D22EB58009DC211 /* encrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C391D22EB58009DC211 /* encrypt.c */; };
 		C2E28C401D22EC0E009DC211 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C3E1D22EC0E009DC211 /* ShadowsocksRunner.m */; };
+		C2E28C4F1D239CC9009DC211 /* CacheStoragePolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C441D239CC9009DC211 /* CacheStoragePolicy.m */; };
+		C2E28C501D239CC9009DC211 /* CanonicalRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C461D239CC9009DC211 /* CanonicalRequest.m */; };
+		C2E28C511D239CC9009DC211 /* CredentialsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C481D239CC9009DC211 /* CredentialsManager.m */; };
+		C2E28C521D239CC9009DC211 /* CustomHTTPProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C4A1D239CC9009DC211 /* CustomHTTPProtocol.m */; };
+		C2E28C531D239CC9009DC211 /* QNSURLSessionDemux.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C4C1D239CC9009DC211 /* QNSURLSessionDemux.m */; };
+		C2E28C541D239CC9009DC211 /* UUSSLWhiteList.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C4E1D239CC9009DC211 /* UUSSLWhiteList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +160,18 @@
 		C2E28C391D22EB58009DC211 /* encrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encrypt.c; sourceTree = "<group>"; };
 		C2E28C3E1D22EC0E009DC211 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowsocksRunner.m; sourceTree = "<group>"; };
 		C2E28C3F1D22EC0E009DC211 /* ShadowsocksRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowsocksRunner.h; sourceTree = "<group>"; };
+		C2E28C431D239CC9009DC211 /* CacheStoragePolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheStoragePolicy.h; sourceTree = "<group>"; };
+		C2E28C441D239CC9009DC211 /* CacheStoragePolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheStoragePolicy.m; sourceTree = "<group>"; };
+		C2E28C451D239CC9009DC211 /* CanonicalRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanonicalRequest.h; sourceTree = "<group>"; };
+		C2E28C461D239CC9009DC211 /* CanonicalRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanonicalRequest.m; sourceTree = "<group>"; };
+		C2E28C471D239CC9009DC211 /* CredentialsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsManager.h; sourceTree = "<group>"; };
+		C2E28C481D239CC9009DC211 /* CredentialsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialsManager.m; sourceTree = "<group>"; };
+		C2E28C491D239CC9009DC211 /* CustomHTTPProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomHTTPProtocol.h; sourceTree = "<group>"; };
+		C2E28C4A1D239CC9009DC211 /* CustomHTTPProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomHTTPProtocol.m; sourceTree = "<group>"; };
+		C2E28C4B1D239CC9009DC211 /* QNSURLSessionDemux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNSURLSessionDemux.h; sourceTree = "<group>"; };
+		C2E28C4C1D239CC9009DC211 /* QNSURLSessionDemux.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNSURLSessionDemux.m; sourceTree = "<group>"; };
+		C2E28C4D1D239CC9009DC211 /* UUSSLWhiteList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUSSLWhiteList.h; sourceTree = "<group>"; };
+		C2E28C4E1D239CC9009DC211 /* UUSSLWhiteList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUSSLWhiteList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +242,7 @@
 		C251CF751C5123220032FE19 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C2E28C421D239CC9009DC211 /* WebViewProxyKit */,
 				C2E28B071D219309009DC211 /* libev */,
 				C2CFE3FD1D215DAD000E40A7 /* shadowsocks */,
 				C2BE3D701C55208B0047C669 /* AlertPopupManager.h */,
@@ -372,6 +391,25 @@
 				C2E28B7D1D22CB40009DC211 /* event.h */,
 			);
 			path = libev;
+			sourceTree = "<group>";
+		};
+		C2E28C421D239CC9009DC211 /* WebViewProxyKit */ = {
+			isa = PBXGroup;
+			children = (
+				C2E28C431D239CC9009DC211 /* CacheStoragePolicy.h */,
+				C2E28C441D239CC9009DC211 /* CacheStoragePolicy.m */,
+				C2E28C451D239CC9009DC211 /* CanonicalRequest.h */,
+				C2E28C461D239CC9009DC211 /* CanonicalRequest.m */,
+				C2E28C471D239CC9009DC211 /* CredentialsManager.h */,
+				C2E28C481D239CC9009DC211 /* CredentialsManager.m */,
+				C2E28C491D239CC9009DC211 /* CustomHTTPProtocol.h */,
+				C2E28C4A1D239CC9009DC211 /* CustomHTTPProtocol.m */,
+				C2E28C4B1D239CC9009DC211 /* QNSURLSessionDemux.h */,
+				C2E28C4C1D239CC9009DC211 /* QNSURLSessionDemux.m */,
+				C2E28C4D1D239CC9009DC211 /* UUSSLWhiteList.h */,
+				C2E28C4E1D239CC9009DC211 /* UUSSLWhiteList.m */,
+			);
+			path = WebViewProxyKit;
 			sourceTree = "<group>";
 		};
 		DF3DF2F121F80443F1B8825C /* Frameworks */ = {
@@ -538,17 +576,23 @@
 				C2BE3D621C54EC4C0047C669 /* MBProgressHUD+Add.m in Sources */,
 				C2CFE3FC1D21587C000E40A7 /* SettingViewController.m in Sources */,
 				C2BE3D4B1C5496100047C669 /* MJPhotoView.m in Sources */,
+				C2E28C521D239CC9009DC211 /* CustomHTTPProtocol.m in Sources */,
 				C2BE3D5E1C54EC200047C669 /* SDWebImageManager+MJ.m in Sources */,
 				C2BE3D481C5496100047C669 /* MJPhotoLoadingView.m in Sources */,
 				C2E28C401D22EC0E009DC211 /* ShadowsocksRunner.m in Sources */,
 				C2E28C2E1D22E53F009DC211 /* table.m in Sources */,
 				C251CF401C4E52260032FE19 /* LoginViewController.m in Sources */,
+				C2E28C541D239CC9009DC211 /* UUSSLWhiteList.m in Sources */,
+				C2E28C511D239CC9009DC211 /* CredentialsManager.m in Sources */,
 				C2BE3D491C5496100047C669 /* MJPhotoProgressView.m in Sources */,
 				C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */,
 				C2BE3D451C5496100047C669 /* MJPhoto.m in Sources */,
 				C2AE04081C3E420800A3E627 /* AppDelegate.m in Sources */,
 				C2E28C371D22EB2D009DC211 /* local.m in Sources */,
 				C238A5351C5907FC00FEDAE6 /* TPPasscodeViewController.m in Sources */,
+				C2E28C4F1D239CC9009DC211 /* CacheStoragePolicy.m in Sources */,
+				C2E28C531D239CC9009DC211 /* QNSURLSessionDemux.m in Sources */,
+				C2E28C501D239CC9009DC211 /* CanonicalRequest.m in Sources */,
 				C2E28C311D22E53F009DC211 /* SimpleTableViewSource.m in Sources */,
 				C251CF3D1C4E51D90032FE19 /* MainViewController.m in Sources */,
 				C2E28C321D22E53F009DC211 /* QRCodeViewController.m in Sources */,

@@ -36,7 +36,7 @@
     self.title = @"设置";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setRightBarButtonItems:@[doneBtn]];
-    
+    [self initLayout];
 }
 
 -(void)initLayout{
@@ -74,10 +74,10 @@
 
 -(void)onDoneBtnClick{
     //保存设置
-    [[NSUserDefaults standardUserDefaults] setObject:self.proxyIp forKey:kShadowsocksIPKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.proxyPort forKey:kShadowsocksPortKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.proxyPassword forKey:kShadowsocksPasswordKey];
-    [[NSUserDefaults standardUserDefaults] setObject:self.proxyEncryption forKey:kShadowsocksEncryptionKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.proxyIp.text forKey:kShadowsocksIPKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.proxyPort.text forKey:kShadowsocksPortKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.proxyPassword.text forKey:kShadowsocksPasswordKey];
+    [[NSUserDefaults standardUserDefaults] setObject:self.proxyEncryption.text forKey:kShadowsocksEncryptionKey];
     
     //如果代理正在运行 可能需要修改配置啥的
 }

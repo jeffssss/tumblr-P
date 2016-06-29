@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <BKPasscodeView/BKPasscodeLockScreenManager.h>
+#import "CredentialsManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,BKPasscodeLockScreenManagerDelegate,BKPasscodeViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong, readwrite) CredentialsManager *   credentialsManager;
 
 @end
 
