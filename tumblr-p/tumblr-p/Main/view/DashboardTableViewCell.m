@@ -256,7 +256,6 @@
         [self.delegate onVideoImageTapped:self];
     }
 }
-
 -(void)onSeeDetailBtnClick:(UIButton *)sender{
     if([self.delegate respondsToSelector:@selector(onTextSeeDetailBtnClick:)]){
         [self.delegate onTextSeeDetailBtnClick:self];
@@ -418,16 +417,26 @@
 -(CGFloat)getHeightAndSetVideoInfo:(UIView *)parentView WithData:(NSDictionary *)data{
     //thumbnail image
     UIImageView *thumbnailImageView = [[UIImageView alloc] init];
-    CGFloat imageHeight = parentView.width * [data[@"thumbnail_height"] floatValue] / [data[@"thumbnail_width"] floatValue];
-    thumbnailImageView.frame = CGRectMake(0, 0, parentView.width, imageHeight);
-    [thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:data[@"thumbnail_url"]] placeholderImage:[UIImage imageNamed:@"video_placeholder.png"]];
+    if(nil == data[@"thumbnail_url"] || [data[@"thumbnail_url"] isEqualToString:@""]){
+        thumbnailImageView.frame = CGRectMake(0, 0, parentView.width, parentView.width/2.0);
+        thumbnailImageView.image = [UIImage imageNamed:@"video_placeholder.png"];
+    } else {
+        CGFloat imageHeight = parentView.width * [data[@"thumbnail_height"] floatValue] / [data[@"thumbnail_width"] floatValue];
+        thumbnailImageView.frame = CGRectMake(0, 0, parentView.width, imageHeight);
+        [thumbnailImageView sd_setImageWithURL:[NSURL URLWithString:data[@"thumbnail_url"]] placeholderImage:[UIImage imageNamed:@"video_placeholder.png"]];
+    }
+    
     thumbnailImageView.userInteractionEnabled = YES;
     [thumbnailImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVideoThumbnail:)]];
     [parentView addSubview:thumbnailImageView];
     
     //playBtn
     UIButton *playBtn = [[UIButton alloc] init];
-    [playBtn setImage:[UIImage imageNamed:@"play_video"] forState:UIControlStateNormal];
+    if(nil == data[@"video_url"] || [data[@"video_url"] isEqualToString:@""]){
+        [playBtn setImage:[UIImage imageNamed:@"play_video_no"] forState:UIControlStateNormal];
+    } else {
+        [playBtn setImage:[UIImage imageNamed:@"play_video"] forState:UIControlStateNormal];
+    }
     [playBtn.imageView setContentMode:UIViewContentModeScaleToFill];
     if(thumbnailImageView.width > thumbnailImageView.height){
         playBtn.frame = CGRectMake((thumbnailImageView.width - 60)/2.0, (thumbnailImageView.height - 60)/2.0, 60, 60);

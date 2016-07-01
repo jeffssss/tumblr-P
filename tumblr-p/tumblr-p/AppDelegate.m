@@ -42,7 +42,7 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
     
     //开始就显示密码登陆,太快了会报错：`Unbalanced calls to begin/end appearance transitions for`
     [self performSelector:@selector(checkPassword) withObject:self afterDelay:0.5];
-    
+    /*
     //web proxy
     NSDictionary *dict = @{
                            @"SOCKSEnable" : @1,
@@ -65,7 +65,7 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
     dispatch_async(proxy, ^{
         [self runProxy];
     });
-    
+    */
     return YES;
 }
 

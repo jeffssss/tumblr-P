@@ -307,6 +307,7 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"heightForRowAtIndexPath:%ld",(long)indexPath.row);
     return [(DashboardTableViewCell *)[self tableView:self.mainTableView cellForRowAtIndexPath:indexPath] getHeight];
 }
 
@@ -464,9 +465,13 @@
 -(void)onVideoImageTapped:(DashboardTableViewCell *)cell{
     NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
     NSDictionary *post = self.dataArray[indexPath.row];
-    
-    MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:post[@"video_url"]]];
-    [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+
+    if(nil == post[@"video_url"] || [post[@"video_url"] isEqualToString:@""]){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:post[@"permalink_url"]]];
+    } else {
+        MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:post[@"video_url"]]];
+        [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+    }
 }
 
 #pragma mark - SEL

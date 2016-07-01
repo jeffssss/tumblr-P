@@ -54,6 +54,8 @@
 		C2BE3D7C1C5523AF0047C669 /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D761C5523AF0047C669 /* cross@2x.png */; };
 		C2BE3D7D1C5523AF0047C669 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D771C5523AF0047C669 /* warning.png */; };
 		C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D781C5523AF0047C669 /* warning@2x.png */; };
+		C2C76F091D2636F6002A7B6F /* play_video_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C76F071D2636F6002A7B6F /* play_video_no@3x.png */; };
+		C2C76F0A1D2636F6002A7B6F /* play_video_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C76F081D2636F6002A7B6F /* play_video_no@2x.png */; };
 		C2CFE3FC1D21587C000E40A7 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */; };
 		C2E28B791D22C120009DC211 /* libev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E28B781D22C120009DC211 /* libev.a */; };
 		C2E28C2E1D22E53F009DC211 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C211D22E53F009DC211 /* table.m */; };
@@ -139,6 +141,8 @@
 		C2BE3D761C5523AF0047C669 /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		C2BE3D771C5523AF0047C669 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		C2BE3D781C5523AF0047C669 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
+		C2C76F071D2636F6002A7B6F /* play_video_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video_no@3x.png"; sourceTree = "<group>"; };
+		C2C76F081D2636F6002A7B6F /* play_video_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video_no@2x.png"; sourceTree = "<group>"; };
 		C2CFE3FA1D21587C000E40A7 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		C2E28B3F1D219BE5009DC211 /* libev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libev.a; path = ../../../../../usr/local/lib/libev.a; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				C238A5371C59151200FEDAE6 /* p_unfill@3x.png */,
 				C238A5381C59151200FEDAE6 /* p_fill@2x.png */,
 				C238A5391C59151200FEDAE6 /* p_fill@3x.png */,
+				C2C76F071D2636F6002A7B6F /* play_video_no@3x.png */,
+				C2C76F081D2636F6002A7B6F /* play_video_no@2x.png */,
 				C238A52D1C569DB600FEDAE6 /* play_video@2x.png */,
 				C238A52E1C569DB600FEDAE6 /* play_video@3x.png */,
 				C238A5311C569DEA00FEDAE6 /* video_placeholder.png */,
@@ -487,6 +493,7 @@
 			files = (
 				C2BE3D7B1C5523AF0047C669 /* cross.png in Resources */,
 				C2BE3D591C54E9620047C669 /* reblog@3x.png in Resources */,
+				C2C76F0A1D2636F6002A7B6F /* play_video_no@2x.png in Resources */,
 				C238A52F1C569DB600FEDAE6 /* play_video@2x.png in Resources */,
 				C238A5481C5A87E500FEDAE6 /* type_all@3x.png in Resources */,
 				C2BE3D4D1C54D0970047C669 /* pic_placeholder.png in Resources */,
@@ -513,6 +520,7 @@
 				C238A5301C569DB600FEDAE6 /* play_video@3x.png in Resources */,
 				C2BE3D511C54E60F0047C669 /* like@3x.png in Resources */,
 				C251CF851C53E0460032FE19 /* avatar_placeholder.jpg in Resources */,
+				C2C76F091D2636F6002A7B6F /* play_video_no@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
