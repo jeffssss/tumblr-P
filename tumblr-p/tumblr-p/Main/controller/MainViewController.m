@@ -12,7 +12,8 @@
 #import "DashboardTableViewCell.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVPlayerViewController.h>
 #import <BBBadgeBarButtonItem/BBBadgeBarButtonItem.h>
 
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
@@ -307,7 +308,6 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"heightForRowAtIndexPath:%ld",(long)indexPath.row);
     return [(DashboardTableViewCell *)[self tableView:self.mainTableView cellForRowAtIndexPath:indexPath] getHeight];
 }
 
@@ -469,8 +469,12 @@
     if(nil == post[@"video_url"] || [post[@"video_url"] isEqualToString:@""]){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:post[@"permalink_url"]]];
     } else {
-        MPMoviePlayerViewController *moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:post[@"video_url"]]];
-        [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+        AVPlayerViewController *moviePlayer = [[AVPlayerViewController alloc] init];
+        AVPlayer *player = [AVPlayer playerWithURL:[NSURL URLWithString:post[@"video_url"]]];
+        moviePlayer.player = player;
+        [self presentViewController:moviePlayer animated:YES completion:^{
+            [moviePlayer.player play];
+        }];
     }
 }
 

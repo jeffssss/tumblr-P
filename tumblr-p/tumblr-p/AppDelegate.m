@@ -42,7 +42,7 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
     
     //开始就显示密码登陆,太快了会报错：`Unbalanced calls to begin/end appearance transitions for`
     [self performSelector:@selector(checkPassword) withObject:self afterDelay:0.5];
-    /*
+
     //web proxy
     NSDictionary *dict = @{
                            @"SOCKSEnable" : @1,
@@ -65,7 +65,7 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
     dispatch_async(proxy, ^{
         [self runProxy];
     });
-    */
+
     return YES;
 }
 
@@ -96,8 +96,8 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
 }
 
 -(void)registeTumblr{
-    [TMAPIClient sharedInstance].OAuthConsumerKey = @"PBwhtXxAZCnmVyzBmcc6fJG7EUXE41F5js8MJFOohuxSAMWD1G";
-    [TMAPIClient sharedInstance].OAuthConsumerSecret = @"nItXj5DFC1VBwk3qEEiIJUjW6ngKqQI1lGPRjyS1eA8bXo0z6Q";
+    [TMAPIClient sharedInstance].OAuthConsumerKey = @"";
+    [TMAPIClient sharedInstance].OAuthConsumerSecret = @"";
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"]){
         [TMAPIClient sharedInstance].OAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
         [TMAPIClient sharedInstance].OAuthTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token_secret"];
