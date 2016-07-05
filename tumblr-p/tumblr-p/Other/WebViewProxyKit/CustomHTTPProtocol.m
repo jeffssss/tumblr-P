@@ -97,6 +97,9 @@ static id<CustomHTTPProtocolDelegate> sDelegate;
 {
     [NSURLProtocol registerClass:self];
 }
++ (void)end{
+    [NSURLProtocol unregisterClass:self];
+}
 
 + (id<CustomHTTPProtocolDelegate>)delegate
 {

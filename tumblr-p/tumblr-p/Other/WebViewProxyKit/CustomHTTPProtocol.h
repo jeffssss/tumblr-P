@@ -66,7 +66,7 @@
  */
 
 + (void)start;
-
++ (void)end;
 /*! Sets the delegate for the class.
  *  \details Note that there's one delegate for the entire class, not one per 
  *  instance of the class as is more normal.  The delegate is not retained in general, 

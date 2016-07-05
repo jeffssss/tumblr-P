@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "ShadowsocksRunner.h"
+#import "CustomHTTPProtocol.h"
 
 @interface SettingViewController ()
 
@@ -41,24 +42,29 @@
 
 -(void)initLayout{
     self.proxySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(20, 70, 60, 30)];
-    [self.proxySwitch setOn:NO];
+    BOOL ifSwitchOn = [[[NSUserDefaults standardUserDefaults] objectForKey:@"kProxySwitch"] boolValue];
+    [self.proxySwitch setOn:ifSwitchOn];
     [self.proxySwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.proxySwitch];
     
     self.proxyIp = [[UITextField alloc] initWithFrame:CGRectMake(20, self.proxySwitch.bottom + 20, 200, 30)];
     self.proxyIp.placeholder = @"input your ip";
+    self.proxyIp.text = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksIPKey];
     [self.view addSubview:self.proxyIp];
     
     self.proxyPort = [[UITextField alloc] initWithFrame:CGRectMake(20, self.proxyIp.bottom + 20, 200, 30)];
     self.proxyPort.placeholder = @"input your port";
+    self.proxyPort.text = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksPortKey];
     [self.view addSubview:self.proxyPort];
     
     self.proxyPassword = [[UITextField alloc] initWithFrame:CGRectMake(20, self.proxyPort.bottom + 20, 200, 30)];
     self.proxyPassword.placeholder = @"input your password";
+    self.proxyPassword.text = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksPasswordKey];
     [self.view addSubview:self.proxyPassword];
     
     self.proxyEncryption = [[UITextField alloc] initWithFrame:CGRectMake(20, self.proxyPassword.bottom + 20, 200, 30)];
     self.proxyEncryption.placeholder = @"input your encryption";
+    self.proxyEncryption.text = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksEncryptionKey];
     [self.view addSubview:self.proxyEncryption];
 
 }
@@ -66,9 +72,9 @@
 -(void)switchAction:(UISwitch *)uiswitch{
     BOOL isButtonOn = [uiswitch isOn];
     if(isButtonOn){
-        
+        [CustomHTTPProtocol start];
     } else {
-        
+        [CustomHTTPProtocol end];
     }
 }
 
@@ -78,8 +84,14 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.proxyPort.text forKey:kShadowsocksPortKey];
     [[NSUserDefaults standardUserDefaults] setObject:self.proxyPassword.text forKey:kShadowsocksPasswordKey];
     [[NSUserDefaults standardUserDefaults] setObject:self.proxyEncryption.text forKey:kShadowsocksEncryptionKey];
+    if (self.proxySwitch.isOn) {
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:kProxySwitch];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:kProxySwitch];
+    }
     
     //如果代理正在运行 可能需要修改配置啥的
+    [ShadowsocksRunner reloadConfig];
 }
 
 - (void)didReceiveMemoryWarning {

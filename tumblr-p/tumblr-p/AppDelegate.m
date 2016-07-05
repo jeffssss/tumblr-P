@@ -13,6 +13,7 @@
 #import "TPPasscodeViewController.h"
 #import "ShadowsocksRunner.h"
 #import "CustomHTTPProtocol.h"
+#import "SettingViewController.h"
 
 NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
 
@@ -54,7 +55,7 @@ NSString *const BKPasscodeKeychainServiceName = @"TPPasscodeService";
     [CustomHTTPProtocol setProxyConfig:dict];
     self.credentialsManager = [[CredentialsManager alloc] init];
     [CustomHTTPProtocol setDelegate:self];
-    if (YES) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kProxySwitch]) {
         [CustomHTTPProtocol start];
     }
     //background proxy

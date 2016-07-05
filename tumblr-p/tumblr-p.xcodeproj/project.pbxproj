@@ -56,6 +56,7 @@
 		C2BE3D7E1C5523AF0047C669 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BE3D781C5523AF0047C669 /* warning@2x.png */; };
 		C2C76F091D2636F6002A7B6F /* play_video_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C76F071D2636F6002A7B6F /* play_video_no@3x.png */; };
 		C2C76F0A1D2636F6002A7B6F /* play_video_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2C76F081D2636F6002A7B6F /* play_video_no@2x.png */; };
+		C2C76F301D2BC67E002A7B6F /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C76F2F1D2BC67E002A7B6F /* VideoPlayerViewController.m */; };
 		C2CFE3FC1D21587C000E40A7 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */; };
 		C2E28B791D22C120009DC211 /* libev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E28B781D22C120009DC211 /* libev.a */; };
 		C2E28C2E1D22E53F009DC211 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E28C211D22E53F009DC211 /* table.m */; };
@@ -143,6 +144,8 @@
 		C2BE3D781C5523AF0047C669 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
 		C2C76F071D2636F6002A7B6F /* play_video_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video_no@3x.png"; sourceTree = "<group>"; };
 		C2C76F081D2636F6002A7B6F /* play_video_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_video_no@2x.png"; sourceTree = "<group>"; };
+		C2C76F2E1D2BC67E002A7B6F /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		C2C76F2F1D2BC67E002A7B6F /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		C2CFE3FA1D21587C000E40A7 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		C2E28B3F1D219BE5009DC211 /* libev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libev.a; path = ../../../../../usr/local/lib/libev.a; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				C238A5341C5907FC00FEDAE6 /* TPPasscodeViewController.m */,
 				C2CFE3FA1D21587C000E40A7 /* SettingViewController.h */,
 				C2CFE3FB1D21587C000E40A7 /* SettingViewController.m */,
+				C2C76F2E1D2BC67E002A7B6F /* VideoPlayerViewController.h */,
+				C2C76F2F1D2BC67E002A7B6F /* VideoPlayerViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				C2E28C511D239CC9009DC211 /* CredentialsManager.m in Sources */,
 				C2BE3D491C5496100047C669 /* MJPhotoProgressView.m in Sources */,
 				C2BE3D721C55208B0047C669 /* AlertPopupManager.m in Sources */,
+				C2C76F301D2BC67E002A7B6F /* VideoPlayerViewController.m in Sources */,
 				C2BE3D451C5496100047C669 /* MJPhoto.m in Sources */,
 				C2AE04081C3E420800A3E627 /* AppDelegate.m in Sources */,
 				C2E28C371D22EB2D009DC211 /* local.m in Sources */,

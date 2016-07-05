@@ -15,6 +15,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVPlayerViewController.h>
 #import <BBBadgeBarButtonItem/BBBadgeBarButtonItem.h>
+#import "VideoPlayerViewController.h"
+#import <VKVideoPlayer/VKVideoPlayerViewController.h>
 
 //当用sinceid拉数据的个数到达该值时，重新拉取所有数据。
 #define refreshDataLimitLine 30
